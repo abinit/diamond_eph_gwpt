@@ -1,0 +1,59 @@
+# Diamond: computation of the phonon spectrum
+
+  iomode    3
+
+# initial steps: compute ground state wavefunctions accurately and the DDK
+# wavefunctions accurately
+
+  #ndtset    1
+
+  tolvrs   1.0d-18     # SCF stopping criterion
+
+#######################################################################
+# Common input variables
+
+# turn on various file outputs
+   prtwf 1
+   prtden 1
+   prtpot 1
+   prteig 0
+
+# Definition of the unit cell: fcc
+    acell  3*6.751         # Experimental lattice constants
+    rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)
+           0.5  0.0  0.5
+           0.5  0.5  0.0
+
+# Definition of the atom types
+   ntypat   1         # There are two types of atom
+    znucl   6         # The keyword "znucl" refers to the atomic number of the
+                      # possible type(s) of atom. The pseudopotential(s)
+                      # mentioned in the "files" file must correspond
+                      # to the type(s) of atom.
+
+# Definition of the atoms
+    natom   2         # There are two atoms
+    typat   1 1
+
+     xred   0.0  0.0  0.0
+            0.25 0.25 0.25
+
+# Gives the number of band, explicitly (do not take the default)
+    nband   8
+
+# Definition of the planewave basis set
+     ecut   45.0           # Maximal kinetic energy cut-off, in Hartree
+
+# Definition of the k-point grid
+    ngkpt   8  8  8
+  nshiftk   1              # Use one copy of grid only (default)
+   shiftk   0.0 0.0 0.0
+
+# Definition of the SCF procedure
+    nstep   100         # Maximal number of SCF cycles
+   diemac   12.0       # Although this is not mandatory, it is worth to
+                       # precondition the SCF cycle. The model dielectric
+                       # function used as the standard preconditioner
+                       # is described in the "dielng" input variable section.
+
+pseudos "C.psp8"

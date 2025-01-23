@@ -1,0 +1,78 @@
+# Diamond: computation of the phonon spectrum
+
+   iomode   3
+   ndtset   3
+
+# Q vectors for all datasets
+
+# Complete set of symmetry-inequivalent qpt chosen to be commensurate
+# with kpt mesh so that only one set of GS wave functions is needed.
+
+   nqpt   1            # One qpt for each dataset (only 0 or 1 allowed)
+   qptopt 1            # activate determining qpts in IBZ with symmetry
+   ngqpt  2 2 2        # these variables mirror those used for the kpt
+   nshiftq 1           # mesh below, but with no shift. In this way,
+   shiftq 0 0 0        # qpts coherent with the kpts are constructed
+                       # the number of resulting q pts is pretdetermined
+                       # through use of the abitk tool
+
+   iqpt: 1 iqpt+ 1     # we automatically iterate through the q pts
+
+
+# Sets 1-3 : Finite-wave-vector phonon calculations (defaults for all datasets)
+
+   getwfk_filepath "groundstateo_WFK.nc" # Use GS wave functions
+   kptopt   3          # Need full k-point set for finite-Q response
+   rfphon   1          # Do phonon response
+   tolvrs   1.0d-18    # Converge on potential residual
+
+# turn off various file outputs, here we will be interested only the
+# DDB files
+
+   prtwf 0
+   prtden 1   # Required by GWPT
+   prtpot 1   # Reqquire by EPH
+   prteig 0
+
+#######################################################################
+# Common input variables
+
+# Definition of the unit cell: fcc
+    acell  3*6.751         # Experimental lattice constants
+    rprim  0.0  0.5  0.5   # FCC primitive vectors (to be scaled by acell)
+           0.5  0.0  0.5
+           0.5  0.5  0.0
+
+# Definition of the atom types
+   ntypat   1         # There are two types of atom
+    znucl   6         # The keyword "znucl" refers to the atomic number of the
+                      # possible type(s) of atom. The pseudopotential(s)
+                      # mentioned in the "files" file must correspond
+                      # to the type(s) of atom.
+
+# Definition of the atoms
+    natom   2         # There are two atoms
+    typat   1 1
+
+     xred   0.0  0.0  0.0
+            0.25 0.25 0.25
+
+# Gives the number of band, explicitly (do not take the default)
+    nband   8
+
+# Definition of the planewave basis set
+     ecut   45.0           # Maximal kinetic energy cut-off, in Hartree
+
+# Definition of the k-point grid
+    ngkpt   8  8  8
+  nshiftk   1              # Use one copy of grid only (default)
+   shiftk   0.0 0.0 0.0
+
+# Definition of the SCF procedure
+    nstep   100        # Maximal number of SCF cycles
+   diemac   12.0       # Although this is not mandatory, it is worth to
+                       # precondition the SCF cycle. The model dielectric
+                       # function used as the standard preconditioner
+                       # is described in the "dielng" input variable section.
+
+pseudos "C.psp8"
