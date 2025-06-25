@@ -19,7 +19,7 @@
  For more information, see https://www.abinit.org .
 
 .Starting date : Wed 25 Jun 2025.
-- ( at 17h38 )
+- ( at 22h23 )
   
 
  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -27,7 +27,7 @@
  === Build Information === 
   Version       : 10.5.1.4
   Build target  : x86_64_linux_gnu11.4
-  Build date    : 20250623
+  Build date    : 20250625
 
  === Compiler Suite === 
   C compiler       : gnu11.4
@@ -181,6 +181,28 @@ message: |
     must be non-null. Returning.
 ...
 
+
+--- !WARNING
+src_file: m_mpinfo.F90
+src_line: 2309
+message: |
+    nproc_spkpt= 4 >= nkpt= 3* nsppol= 1
+    The number of processors is larger than nkpt*nsppol. This is a WASTE.
+     Ignore this warning if this is not a GS run
+...
+
+
+--- !WARNING
+src_file: m_mpi_setup.F90
+src_line: 832
+message: |
+    Your number of spins*k-points (=3) will not distribute correctly
+    with the current number of processors (=4).
+    You will leave some empty.
+    YOU ARE STRONGLY ADVISED TO ACTIVATE AUTOMATIC PARALLELIZATION!
+    USE "AUTOPARAL=1" IN THE INPUT FILE.
+...
+
  For input ecut=  4.500000E+01 best grid ngfft=      30      30      30
        max ecut=  4.883263E+01
 
@@ -189,7 +211,17 @@ message: |
   Augmented FFT divisions ...................    31   31   30
   FFT algorithm .............................   512
   FFT cache size ............................    16
- getmpw: optimal value of mpw= 1124
+ getmpw: optimal value of mpw= 553
+
+--- !WARNING
+src_file: m_mpinfo.F90
+src_line: 2309
+message: |
+    nproc_spkpt= 4 >= nkpt= 3* nsppol= 1
+    The number of processors is larger than nkpt*nsppol. This is a WASTE.
+     Ignore this warning if this is not a GS run
+...
+
  For input ecut=  4.500000E+01 best grid ngfft=      30      30      30
        max ecut=  4.883263E+01
 
@@ -198,7 +230,7 @@ message: |
   Augmented FFT divisions ...................    31   31   30
   FFT algorithm .............................   512
   FFT cache size ............................    16
- getmpw: optimal value of mpw= 1124
+ getmpw: optimal value of mpw= 553
  DATASET    1 : space group Fd -3 m (#227); Bravais cF (face-center cubic)
 
  getdim_nloc: deduce lmnmax  =   8, lnmax  =   4,
@@ -211,17 +243,17 @@ memory: analysis of memory needs
      natom =       2  nloc_mem =       1    nspden =       1   nspinor =       1
     nsppol =       1      nsym =      48    n1xccc =    2501    ntypat =       1
     occopt =       1   xclevel =       2
--    mband =          70        mffmem =           1         mkmem =           2
-       mpw =        1124          nfft =       27000          nkpt =           8
+-    mband =          70        mffmem =           1         mkmem =           1
+       mpw =         553          nfft =       27000          nkpt =           3
 ================================================================================
-P This job should need less than                       8.462 Mbytes of memory.
+P This job should need less than                       6.481 Mbytes of memory.
   Rough estimation (10% accuracy) of disk space for files :
-_ WF disk file :      9.606 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
+_ WF disk file :      1.774 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
 ================================================================================
 
- Biggest array : cg(disk), with      2.4031 MBytes.
- memana : allocated an array of      2.403 Mbytes, for testing purposes.
- memana: allocated       8.462Mbytes, for testing purposes. 
+ Biggest array : cg(disk), with      0.5927 MBytes.
+ memana : allocated an array of      0.593 Mbytes, for testing purposes.
+ memana: allocated       6.481Mbytes, for testing purposes. 
  The job will continue.
  DATASET    2 : space group Fd -3 m (#227); Bravais cF (face-center cubic)
 
@@ -235,15 +267,15 @@ memory: analysis of memory needs
      natom =       2  nloc_mem =       1    nspden =       1   nspinor =       1
     nsppol =       1      nsym =      48    n1xccc =    2501    ntypat =       1
     occopt =       1   xclevel =       2
--    mband =          60        mffmem =           1         mkmem =           2
-       mpw =        1124          nfft =       27000          nkpt =           8
+-    mband =          60        mffmem =           1         mkmem =           1
+       mpw =         553          nfft =       27000          nkpt =           3
 ================================================================================
-P This job should need less than                       8.075 Mbytes of memory.
+P This job should need less than                       6.360 Mbytes of memory.
   Rough estimation (10% accuracy) of disk space for files :
-_ WF disk file :      8.234 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
+_ WF disk file :      1.521 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
 ================================================================================
 
- Biggest array : cg(disk), with      2.0601 MBytes.
+ Biggest array : cg(disk), with      0.5083 MBytes.
 --------------------------------------------------------------------------------
 ------------- Echo of variables that govern the present computation ------------
 --------------------------------------------------------------------------------
@@ -269,20 +301,15 @@ _ WF disk file :      8.234 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
 -          fftalg         512
            getwfk          -1
              iscf          -2
-           istwfk        2    0    3    0    0    0    7    0
+           istwfk        2    3    7
               ixc          11
            jdtset        1    2
               kpt      0.00000000E+00  0.00000000E+00  0.00000000E+00
-                       2.50000000E-01  0.00000000E+00  0.00000000E+00
                        5.00000000E-01  0.00000000E+00  0.00000000E+00
-                       2.50000000E-01  2.50000000E-01  0.00000000E+00
-                       5.00000000E-01  2.50000000E-01  0.00000000E+00
-                      -2.50000000E-01  2.50000000E-01  0.00000000E+00
                        5.00000000E-01  5.00000000E-01  0.00000000E+00
-                      -2.50000000E-01  5.00000000E-01  2.50000000E-01
-         kptrlatt        4    0    0      0    4    0      0    0    4
-          kptrlen      1.90947115E+01
-P           mkmem           2
+         kptrlatt        2    0    0      0    2    0      0    0    2
+          kptrlen      9.54735576E+00
+P           mkmem           1
             natom           2
             nband1         70
             nband2         60
@@ -290,7 +317,7 @@ P           mkmem           2
            nbdbuf2          6
            ndtset           2
             ngfft          30      30      30
-             nkpt           8
+             nkpt           3
            npweps1          0
            npweps2         15
            npwwfn1          0
@@ -356,8 +383,7 @@ P           mkmem           2
                        0.0000000  0.0000000  0.0000000     0.2500000  0.2500000  0.2500000
            tolwfr      1.00000000E-14
             typat      1  1
-              wtk        0.01563    0.12500    0.06250    0.09375    0.37500    0.18750
-                         0.04688    0.09375
+              wtk        0.12500    0.50000    0.37500
            xangst      0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
                        8.9311883380E-01  8.9311883380E-01  8.9311883380E-01
             xcart      0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
@@ -405,6 +431,7 @@ P           mkmem           2
 ================================================================================
 == DATASET  1 ==================================================================
 -   mpi_nproc: 4, omp_nthreads: -1 (-1 if OMP is not activated)
+-    --> not optimal distribution: autoparal keyword recommended in input file <--
 
 
 --- !COMMENT
@@ -427,12 +454,12 @@ message: |
 
 --- !PstatData
 iteration_state: {dtset: 1, }
-pid: 17392
+pid: 21579
 file: m_driver.F90
 line: 755
-vmrss_mb:   3.99453125E+01
-min_mpicomm_vmrss_mb:   3.99453125E+01
-max_mpicomm_vmrss_mb:   3.99453125E+01
+vmrss_mb:   4.00156250E+01
+min_mpicomm_vmrss_mb:   4.00156250E+01
+max_mpicomm_vmrss_mb:   4.00156250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -492,7 +519,6 @@ vmstk_mb:   0.00000000E+00
    2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1
    2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1  2  1
  wfconv:    70 bands initialized randomly with npw=   534, for ikpt=     1
- wfconv:    70 bands initialized randomly with npw=  1101, for ikpt=     2
  About to read data(r) from: gso_DEN.nc
 
 ================================================================================
@@ -505,8 +531,8 @@ vmstk_mb:   0.00000000E+00
 
   calculation expects a density             |  input file contains a density
 . ABINIT  code version 10.5.1.4             |  ABINIT  code version 10.5.1.4
-. date 20250625 bantot      560 natom    2  |  date 20250625 bantot      232 natom    2
-  nkpt       8 nsym 48 ngfft  30,  30,  30  |  nkpt      29 nsym 48 ngfft  30,  30,  30
+. date 20250625 bantot      210 natom    2  |  date 20250625 bantot      232 natom    2
+  nkpt       3 nsym 48 ngfft  30,  30,  30  |  nkpt      29 nsym 48 ngfft  30,  30,  30
   ntypat  1 ecut_eff  45.0000000            |  ntypat  1 ecut_eff  45.0000000
   usepaw  0                                 |  usepaw  0
   usewvl  0                                 |  usewvl  0
@@ -577,7 +603,7 @@ vmstk_mb:   0.00000000E+00
 src_file: m_hdr.F90
 src_line: 4225
 message: |
-    input kptrlatt = 4 0 0 0 4 0 0 0 4  /= disk file kptrlatt = 8 0 0 0 8 0 0 0 8
+    input kptrlatt = 2 0 0 0 2 0 0 0 2  /= disk file kptrlatt = 8 0 0 0 8 0 0 0 8
 ...
 
 
@@ -647,16 +673,16 @@ message: |
      0.2500000   0.2500000   0.2500000      |     0.2500000   0.2500000   0.2500000
  hdr_check:  Density/Potential file is OK for restart of calculation
 ================================================================================
- read_rhor , wall:  0.03 [s] , cpu:  0.02 [s] <<< TIME
+ read_rhor , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
 
 --- !PstatData
 iteration_state: {dtset: 1, }
-pid: 17392
+pid: 21579
 file: m_gstate.F90
 line: 1364
-vmrss_mb:   4.93750000E+01
-min_mpicomm_vmrss_mb:   4.93750000E+01
-max_mpicomm_vmrss_mb:   4.93750000E+01
+vmrss_mb:   4.82773438E+01
+min_mpicomm_vmrss_mb:   4.82773438E+01
+max_mpicomm_vmrss_mb:   4.82773438E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -666,12 +692,12 @@ vmstk_mb:   0.00000000E+00
 
 --- !PstatData
 iteration_state: {dtset: 1, }
-pid: 17392
+pid: 21579
 file: m_scfcv_core.F90
 line: 1032
-vmrss_mb:   4.94609375E+01
-min_mpicomm_vmrss_mb:   4.94609375E+01
-max_mpicomm_vmrss_mb:   4.94609375E+01
+vmrss_mb:   4.83632812E+01
+min_mpicomm_vmrss_mb:   4.83632812E+01
+max_mpicomm_vmrss_mb:   4.83632812E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -687,10 +713,10 @@ vmstk_mb:   0.00000000E+00
  1/G**2 cut-off applied in the following step : cutoff-mode = CRYSTAL
  Max number of non-self-consistent loops: 150
  cgwf: tolwfr_diago=    1.000000E-14
- k-point: [ 1 / 8 ], spin: 1
-   Max resid = 5.41918E+00  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.12 [s] , wall-time:  0.12 [s]
-   Max resid = 7.38437E-02  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.08 [s] , wall-time:  0.10 [s]
-   Max resid = 4.08639E-04  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.11 [s] , wall-time:  0.10 [s]
+ k-point: [ 1 / 3 ], spin: 1
+   Max resid = 5.41918E+00  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.08 [s] , wall-time:  0.09 [s]
+   Max resid = 7.38437E-02  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.09 [s] , wall-time:  0.09 [s]
+   Max resid = 4.08639E-04  (exclude nbdbuf bands). One NSCF iteration cpu-time:  0.08 [s] , wall-time:  0.07 [s]
    Printing residuals every mod(20) iterations...
    NSCF loop completed after 8 iterations
  
@@ -709,7 +735,7 @@ vmstk_mb:   0.00000000E+00
  fftdatar_write: About to write data to: gwo_DS1_DEN with iomode: IO_MODE_ETSF
 - Creating HDf5 file with MPI-IO support: gwo_DS1_DEN.nc
 - Opening HDf5 file with MPI-IO support: gwo_DS1_DEN.nc
- IO operation , wall:  0.07 [s] , cpu:  0.05 [s] <<< TIME
+ IO operation , wall:  0.08 [s] , cpu:  0.06 [s] <<< TIME
  Integrated electronic density in atomic spheres:
  ------------------------------------------------
  Atom  Sphere_radius  Integrated_density
@@ -724,9 +750,9 @@ vmstk_mb:   0.00000000E+00
  === Gap info ===
   >>>> For spin  1
    Minimum direct gap =   5.6106 [eV], located at k-point      :   0.0000  0.0000  0.0000
-   Fundamental gap    =   4.4768 [eV], Top of valence bands at :   0.0000  0.0000  0.0000
-                                       Bottom of conduction at :   0.2500  0.2500  0.0000
- Mean square residual over all n,k,spin=   31.248E-16; max=  99.793E-16
+   Fundamental gap    =   4.8146 [eV], Top of valence bands at :   0.0000  0.0000  0.0000
+                                       Bottom of conduction at :   0.5000  0.5000  0.0000
+ Mean square residual over all n,k,spin=   35.847E-16; max=  97.804E-16
    0.0000  0.0000  0.0000    1  2.96384E-10 kpt; spin; max resid(k); each band:
   4.36E-15 4.90E-16 6.16E-16 3.51E-16 8.28E-15 2.95E-16 7.12E-15 5.40E-15
   1.63E-15 3.98E-16 3.15E-15 7.59E-15 5.18E-16 8.18E-15 3.07E-15 5.41E-16
@@ -737,16 +763,6 @@ vmstk_mb:   0.00000000E+00
   2.61E-15 2.30E-15 8.28E-16 2.81E-15 1.43E-15 4.88E-16 2.70E-15 4.54E-15
   7.04E-15 3.24E-15 7.65E-15 2.93E-15 2.61E-15 9.49E-15 4.00E-15 1.86E-14
   3.95E-13 2.22E-11 1.94E-10 2.96E-10 6.60E-11 1.53E-10
-   0.2500  0.0000  0.0000    1  8.64779E-07 kpt; spin; max resid(k); each band:
-  3.62E-15 5.08E-16 1.02E-15 4.26E-16 1.19E-15 2.86E-16 2.20E-16 3.57E-16
-  1.49E-16 1.73E-16 7.12E-17 2.31E-15 2.66E-16 3.59E-15 4.78E-16 2.53E-16
-  2.14E-16 1.46E-16 3.81E-16 2.54E-16 5.87E-16 1.10E-15 4.92E-16 1.14E-15
-  1.39E-15 1.19E-15 1.84E-15 2.27E-15 6.33E-16 5.48E-16 2.20E-15 1.49E-15
-  1.96E-15 7.28E-15 8.89E-15 4.80E-15 1.20E-15 5.32E-15 1.11E-15 5.27E-15
-  6.84E-16 1.43E-15 1.25E-15 7.38E-15 6.41E-15 7.48E-15 8.19E-16 5.29E-16
-  1.12E-15 3.70E-15 2.37E-15 2.01E-15 3.18E-15 7.44E-15 3.69E-15 8.67E-16
-  1.13E-15 3.43E-15 1.32E-15 4.68E-15 2.83E-15 5.21E-15 5.71E-15 2.79E-15
-  2.73E-15 4.75E-13 5.32E-13 7.33E-09 1.15E-07 8.65E-07
    0.5000  0.0000  0.0000    1  7.14543E-12 kpt; spin; max resid(k); each band:
   3.58E-15 7.56E-16 1.56E-15 5.19E-16 6.17E-16 7.43E-15 9.45E-15 1.31E-15
   7.84E-16 4.50E-16 3.84E-16 2.27E-16 2.37E-15 7.38E-16 1.76E-16 5.71E-16
@@ -757,36 +773,6 @@ vmstk_mb:   0.00000000E+00
   7.37E-15 1.80E-15 7.96E-15 9.40E-15 7.28E-15 8.32E-15 3.15E-15 3.36E-15
   5.57E-15 7.71E-15 1.76E-15 8.86E-15 9.54E-15 5.88E-15 5.30E-15 5.94E-15
   5.39E-15 2.36E-15 4.18E-14 9.47E-15 2.86E-12 7.15E-12
-   0.2500  0.2500  0.0000    1  1.36692E-04 kpt; spin; max resid(k); each band:
-  1.67E-15 3.53E-16 8.91E-15 3.17E-16 1.89E-16 9.02E-15 1.20E-15 2.15E-15
-  2.58E-16 5.23E-16 2.52E-16 1.68E-16 4.07E-16 7.34E-15 5.69E-16 2.07E-16
-  3.31E-16 1.01E-15 6.21E-16 6.65E-16 3.80E-16 9.06E-16 1.51E-15 3.37E-16
-  4.02E-16 1.22E-15 7.09E-15 1.53E-15 1.71E-15 3.32E-15 4.31E-15 1.39E-15
-  1.25E-15 2.39E-15 9.44E-16 9.59E-15 5.80E-15 6.14E-15 1.05E-15 2.53E-15
-  2.91E-15 2.01E-15 3.97E-15 2.19E-15 6.34E-15 3.24E-15 1.31E-15 5.60E-15
-  1.09E-15 5.27E-15 9.87E-15 1.88E-15 6.83E-16 2.64E-15 2.06E-15 1.71E-15
-  4.11E-15 4.10E-15 5.09E-15 4.95E-15 3.31E-15 3.39E-15 7.89E-15 7.42E-15
-  1.91E-13 3.65E-11 4.99E-10 4.45E-07 5.30E-08 1.37E-04
-   0.5000  0.2500  0.0000    1  4.03002E-04 kpt; spin; max resid(k); each band:
-  6.80E-15 2.21E-16 2.24E-16 4.07E-16 2.28E-16 4.58E-16 1.56E-15 1.01E-15
-  4.25E-16 8.98E-16 7.98E-15 8.09E-15 2.31E-16 1.76E-16 9.43E-15 2.49E-16
-  7.08E-15 4.87E-16 1.14E-16 4.35E-16 3.93E-16 8.84E-16 4.42E-16 1.29E-15
-  9.83E-16 1.14E-15 1.08E-15 9.80E-16 8.32E-16 9.18E-16 4.78E-15 2.20E-15
-  8.85E-16 8.98E-15 1.14E-15 1.38E-15 7.76E-16 2.34E-15 7.36E-15 5.03E-15
-  4.90E-15 7.62E-15 5.35E-15 6.27E-15 6.93E-15 4.89E-15 9.11E-16 1.06E-15
-  9.73E-15 3.87E-15 2.40E-15 2.20E-15 6.73E-15 6.97E-15 6.95E-15 2.99E-15
-  9.63E-15 6.85E-15 8.43E-15 4.84E-15 4.15E-15 3.34E-15 9.59E-15 1.11E-14
-  7.21E-14 7.06E-12 1.62E-12 1.77E-09 4.03E-04 9.22E-05
-  -0.2500  0.2500  0.0000    1  2.18227E-05 kpt; spin; max resid(k); each band:
-  1.90E-16 1.94E-16 2.92E-16 6.30E-16 4.97E-16 4.03E-16 7.04E-16 6.23E-16
-  7.68E-16 9.85E-15 6.80E-16 1.40E-16 1.00E-16 7.28E-16 7.40E-16 7.91E-16
-  9.75E-16 5.97E-16 3.76E-16 5.52E-16 4.54E-16 1.11E-15 1.11E-15 1.15E-15
-  5.63E-16 1.90E-15 1.09E-15 2.83E-15 3.47E-15 2.46E-15 5.40E-15 2.15E-15
-  2.38E-15 6.95E-16 5.92E-15 1.67E-15 8.30E-15 3.52E-15 3.19E-15 5.25E-16
-  6.54E-16 1.74E-15 6.42E-15 1.39E-15 1.07E-15 2.13E-15 1.55E-15 5.57E-15
-  1.79E-15 2.50E-15 2.54E-15 8.93E-15 9.57E-15 2.37E-15 6.65E-15 4.84E-15
-  3.28E-15 8.09E-15 5.34E-15 5.99E-15 8.63E-15 5.80E-15 3.35E-15 4.38E-15
-  7.80E-15 1.75E-12 4.25E-12 9.00E-07 1.93E-05 2.18E-05
    0.5000  0.5000  0.0000    1  2.14789E-02 kpt; spin; max resid(k); each band:
   8.21E-15 9.78E-15 7.29E-16 1.75E-15 4.45E-15 8.91E-16 3.02E-15 3.75E-15
   7.89E-15 3.29E-15 1.91E-15 4.34E-15 3.25E-15 9.00E-15 3.52E-15 2.12E-15
@@ -797,23 +783,21 @@ vmstk_mb:   0.00000000E+00
   9.97E-16 6.74E-15 4.81E-15 6.26E-15 6.97E-15 2.65E-15 3.51E-15 2.54E-15
   1.62E-15 2.38E-15 6.01E-15 1.86E-15 3.27E-15 1.46E-15 2.81E-15 4.00E-15
   1.66E-08 1.87E-06 5.17E-08 5.74E-05 8.07E-06 2.15E-02
-  -0.2500  0.5000  0.2500    1  1.13599E-08 kpt; spin; max resid(k); each band:
-  9.98E-15 3.44E-15 4.46E-15 1.10E-15 5.06E-16 2.42E-16 4.61E-16 5.84E-16
-  1.34E-15 2.69E-16 2.47E-16 2.26E-16 5.11E-15 7.90E-15 1.02E-16 6.86E-15
-  3.47E-16 1.76E-16 2.01E-16 2.36E-16 9.12E-15 2.09E-16 9.89E-15 6.54E-15
-  3.98E-16 2.16E-16 3.34E-16 6.05E-15 5.23E-16 2.03E-15 3.64E-16 4.22E-16
-  2.23E-15 5.45E-15 4.42E-15 6.64E-15 3.98E-15 8.46E-16 3.80E-15 9.09E-15
-  3.02E-15 5.84E-16 1.02E-15 1.43E-15 1.86E-15 7.87E-15 1.09E-15 9.99E-16
-  8.38E-16 9.64E-16 2.91E-15 8.30E-15 6.22E-15 8.10E-15 2.42E-15 2.81E-15
-  2.18E-15 2.60E-15 1.88E-15 3.29E-15 2.54E-15 9.64E-15 4.74E-15 6.72E-15
-  3.42E-15 4.67E-15 1.17E-12 3.74E-12 1.83E-09 1.14E-08
  In cg_ncwrite with path: gwo_DS1_WFK.nc
  same layout --> writing WFK file: gwo_DS1_WFK.nc, with iomode: IO_MODE_ETSF, single writer: F
+
+--- !COMMENT
+src_file: m_iowf.F90
+src_line: 851
+message: |
+    Will create subcommunicator to exclude idle processors from MPI-IO collective calls
+...
+
 Using collective IO for the CGs
- collective ncwrite , wall:  0.24 [s] , cpu:  0.17 [s] <<< TIME
+ collective ncwrite , wall:  0.08 [s] , cpu:  0.08 [s] <<< TIME
  prteigrs : about to open file gwo_DS1_EIG
- Eigenvalues (hartree) for nkpt=   8  k points:
- kpt#   1, nband= 70, wtk=  0.01563, kpt=  0.0000  0.0000  0.0000 (reduced coord)
+ Eigenvalues (hartree) for nkpt=   3  k points:
+ kpt#   1, nband= 70, wtk=  0.12500, kpt=  0.0000  0.0000  0.0000 (reduced coord)
   -0.41171    0.37562    0.37562    0.37562    0.58180    0.58180    0.58180    0.86143
    1.08248    1.36066    1.36066    1.38895    1.38895    1.38895    1.65152    2.10589
    2.10589    2.10589    2.87303    2.87303    2.87303    3.02847    3.02847    3.10784
@@ -823,17 +807,7 @@ Using collective IO for the CGs
    4.46726    4.53529    4.74893    4.81499    4.81499    4.81499    4.84313    4.84313
    4.84313    5.08923    5.26429    6.19701    6.19701    6.19701    6.46298    6.46298
    6.56357    6.56357    6.56357    6.72689    7.03881    7.03881
- kpt#   2, nband= 70, wtk=  0.12500, kpt=  0.2500  0.0000  0.0000 (reduced coord)
-  -0.34892    0.13401    0.31154    0.31154    0.66247    0.66247    0.67482    0.91055
-   1.13466    1.20445    1.20445    1.30978    1.81249    1.81249    1.94292    1.94292
-   1.97292    2.01432    2.55109    2.55109    2.90680    2.94960    2.94960    3.13036
-   3.13036    3.17996    3.22157    3.36917    3.41990    3.41990    3.73557    3.77645
-   3.77645    3.87356    3.87356    3.89027    3.99679    3.99679    4.07580    4.29775
-   4.29775    4.33264    4.39894    4.64415    4.64415    4.73520    4.73520    4.75897
-   4.99384    5.03110    5.03110    5.08089    5.17180    5.34386    5.34386    5.37992
-   5.51807    5.51807    5.61109    5.61109    5.86928    6.06787    6.06787    6.10911
-   6.16984    6.36332    6.36332    6.66809    6.78960    6.78960
- kpt#   3, nband= 70, wtk=  0.06250, kpt=  0.5000  0.0000  0.0000 (reduced coord)
+ kpt#   2, nband= 70, wtk=  0.50000, kpt=  0.5000  0.0000  0.0000 (reduced coord)
   -0.20045   -0.11439    0.27273    0.27273    0.68780    0.68780    0.70009    0.95131
    1.17777    1.26064    1.33038    1.33038    1.63488    1.63488    2.06357    2.33208
    2.33208    2.44548    2.47234    2.47234    2.57533    2.57533    2.69422    2.76613
@@ -843,37 +817,7 @@ Using collective IO for the CGs
    5.07610    5.07610    5.15193    5.27516    5.34200    5.34200    5.57780    5.60322
    5.60322    5.87013    5.87013    5.91022    5.91022    6.05601    6.06614    6.08236
    6.13574    6.13574    6.18844    6.18844    6.20399    6.23958
- kpt#   4, nband= 70, wtk=  0.09375, kpt=  0.2500  0.2500  0.0000 (reduced coord)
-  -0.32807    0.20969    0.22452    0.22452    0.54014    0.75342    0.80098    0.80098
-   1.11416    1.18829    1.46790    1.57454    1.57454    1.68763    1.88346    1.88346
-   2.05733    2.23823    2.32342    2.74354    2.74354    2.89925    2.89925    2.91827
-   2.99561    3.06183    3.29923    3.42663    3.42663    3.71597    3.75976    3.75976
-   3.82916    3.85361    3.93837    4.00825    4.01992    4.01992    4.09865    4.19248
-   4.19248    4.23357    4.42584    4.50104    4.50104    4.74716    4.87228    4.87646
-   4.87646    4.88856    4.92885    5.06116    5.21776    5.50439    5.53496    5.53496
-   5.74845    5.84780    5.84780    5.89751    5.89751    5.90079    6.23450    6.23450
-   6.34652    6.42695    6.44924    6.53394    6.60363    6.60385
- kpt#   5, nband= 70, wtk=  0.37500, kpt=  0.5000  0.2500  0.0000 (reduced coord)
-  -0.19127   -0.01993    0.12853    0.19673    0.60065    0.79629    0.84604    0.86413
-   1.12080    1.23969    1.39071    1.51467    1.70938    1.90242    2.00211    2.06633
-   2.24867    2.25160    2.30794    2.50166    2.57123    2.63916    2.70622    2.82894
-   2.91046    3.04708    3.12582    3.22140    3.30236    3.35582    3.55393    3.64734
-   3.73967    3.75610    3.89939    4.02470    4.05948    4.34018    4.34989    4.36115
-   4.41787    4.48985    4.61623    4.63026    4.75280    4.82643    4.90284    5.00150
-   5.03629    5.06190    5.29486    5.30318    5.46105    5.55215    5.66026    5.72314
-   5.72334    5.79252    5.86136    5.89695    5.98139    6.06953    6.07054    6.10971
-   6.14589    6.23515    6.24199    6.33391    6.48302    6.51274
- kpt#   6, nband= 70, wtk=  0.18750, kpt= -0.2500  0.2500  0.0000 (reduced coord)
-  -0.24816    0.05640    0.09696    0.26506    0.66816    0.74348    0.82927    0.88489
-   1.09706    1.14425    1.28181    1.59759    1.69712    1.90388    1.92951    1.94011
-   2.25889    2.39236    2.40256    2.43706    2.60001    2.73101    2.81695    2.83131
-   2.90285    2.99861    3.24427    3.28829    3.30346    3.43885    3.61930    3.64573
-   3.69571    3.77571    3.81647    3.96815    4.06445    4.10591    4.13751    4.35709
-   4.51866    4.52217    4.61823    4.71146    4.80341    4.85543    4.89874    4.99768
-   5.11675    5.11711    5.22148    5.32420    5.34810    5.39061    5.44806    5.51378
-   5.64481    5.70647    5.79801    5.83334    5.87389    6.09189    6.11989    6.14160
-   6.14407    6.25586    6.29739    6.46370    6.52450    6.54436
- kpt#   7, nband= 70, wtk=  0.04688, kpt=  0.5000  0.5000  0.0000 (reduced coord)
+ kpt#   3, nband= 70, wtk=  0.37500, kpt=  0.5000  0.5000  0.0000 (reduced coord)
   -0.09265   -0.09265    0.14458    0.14458    0.55255    0.55255    0.99075    0.99075
    1.22590    1.22590    1.56835    1.56835    1.78929    1.78929    2.16664    2.16664
    2.17044    2.17044    2.20955    2.20955    2.32587    2.32587    2.90964    2.90964
@@ -883,23 +827,13 @@ Using collective IO for the CGs
    5.29014    5.29014    5.36598    5.36598    5.55897    5.55897    5.63372    5.63372
    5.66395    5.66395    5.71388    5.71388    5.73766    5.73766    5.98678    5.98678
    6.50789    6.50789    6.58400    6.58403    6.68785    6.70166
- kpt#   8, nband= 70, wtk=  0.09375, kpt= -0.2500  0.5000  0.2500 (reduced coord)
-  -0.06388   -0.06388    0.07091    0.07091    0.76734    0.76734    0.82722    0.82722
-   1.15796    1.15796    1.49494    1.49494    1.96483    1.96483    2.04811    2.04811
-   2.14137    2.14137    2.42099    2.42099    2.48033    2.48033    2.87124    2.87124
-   2.91081    2.91081    2.92392    2.92392    3.46930    3.46930    3.54306    3.54306
-   3.80447    3.80447    3.94871    3.94871    4.06298    4.06298    4.58002    4.58002
-   4.59455    4.59455    4.66098    4.66098    4.87262    4.87262    4.90670    4.90670
-   5.18260    5.18260    5.23821    5.23821    5.32554    5.32554    5.56140    5.56140
-   5.82397    5.82397    5.86793    5.86793    6.01502    6.01502    6.07879    6.07879
-   6.17280    6.17280    6.39433    6.39433    6.53723    6.53723
  Total charge density [el/Bohr^3]
 )     Maximum=    2.9519E-01  at reduced coord.    0.2000    0.2000    0.4333
 )Next maximum=    2.9519E-01  at reduced coord.    0.1667    0.2000    0.4333
 )     Minimum=    1.3092E-02  at reduced coord.    0.5000    0.5000    0.5000
 )Next minimum=    1.3251E-02  at reduced coord.    0.7667    0.7333    0.7333
    Integrated=    8.0000E+00
- dataset: 1 , wall:  4.42 [s] , cpu:  3.92 [s] <<< TIME
+ dataset: 1 , wall:  1.08 [s] , cpu:  1.02 [s] <<< TIME
 
 ================================================================================
 == DATASET  2 ==================================================================
@@ -928,12 +862,12 @@ message: |
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_driver.F90
 line: 755
-vmrss_mb:   5.61679688E+01
-min_mpicomm_vmrss_mb:   5.61679688E+01
-max_mpicomm_vmrss_mb:   5.61679688E+01
+vmrss_mb:   5.52031250E+01
+min_mpicomm_vmrss_mb:   5.52031250E+01
+max_mpicomm_vmrss_mb:   5.52031250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -961,14 +895,14 @@ vmstk_mb:   0.00000000E+00
  zcut to avoid poles in chi0 [eV] =   0.100000
 
  Reading eigenvalues from: gwo_DS1_WFK.nc , with iomode: IO_MODE_ETSF
- wfk_read_eigenvalues_io , wall:  0.04 [s] , cpu:  0.03 [s] <<< TIME
- wfk_read_eigenvalues , wall:  0.04 [s] , cpu:  0.03 [s] <<< TIME
+ wfk_read_eigenvalues_io , wall:  0.02 [s] , cpu:  0.03 [s] <<< TIME
+ wfk_read_eigenvalues , wall:  0.02 [s] , cpu:  0.03 [s] <<< TIME
 
  Sorting g-vecs for an output of states on an unique "big" PW basis.
  Since the number of g's to be written on file
  was 0 or too large, it has been set to the max. value.,
  computed from the union of the sets of G vectors for the different k-points.
- Number of G-vectors is:  1459
+ Number of G-vectors is:  1435
 
   ==== Info on the Cryst% object ====
  Real(R)+Recip(G) space primitive vectors, cartesian coordinates (Bohr,Bohr^-1):
@@ -982,45 +916,35 @@ vmstk_mb:   0.00000000E+00
     1)    0.0000000  0.0000000  0.0000000   C
     2)    0.2500000  0.2500000  0.2500000   C
  ==== K-mesh for the wavefunctions ====
- Number of points in the irreducible wedge :     8
+ Number of points in the irreducible wedge :     3
  Reduced coordinates and weights : 
 
-     1)     0.00000000E+00  0.00000000E+00  0.00000000E+00       0.01563
-     2)     2.50000000E-01  0.00000000E+00  0.00000000E+00       0.12500
-     3)     5.00000000E-01  0.00000000E+00  0.00000000E+00       0.06250
-     4)     2.50000000E-01  2.50000000E-01  0.00000000E+00       0.09375
-     5)     5.00000000E-01  2.50000000E-01  0.00000000E+00       0.37500
-     6)    -2.50000000E-01  2.50000000E-01  0.00000000E+00       0.18750
-     7)     5.00000000E-01  5.00000000E-01  0.00000000E+00       0.04688
-     8)    -2.50000000E-01  5.00000000E-01  2.50000000E-01       0.09375
+     1)     0.00000000E+00  0.00000000E+00  0.00000000E+00       0.12500
+     2)     5.00000000E-01  0.00000000E+00  0.00000000E+00       0.50000
+     3)     5.00000000E-01  5.00000000E-01  0.00000000E+00       0.37500
 
  Together with 48 symmetry operations and time-reversal symmetry 
- yields    64 points in the full Brillouin Zone.
+ yields     8 points in the full Brillouin Zone.
 
 
  ==== Q-mesh for the screening function ====
- Number of points in the irreducible wedge :     8
+ Number of points in the irreducible wedge :     3
  Reduced coordinates and weights : 
 
-     1)     0.00000000E+00  0.00000000E+00  0.00000000E+00       0.01563
-     2)     2.50000000E-01  0.00000000E+00  0.00000000E+00       0.12500
-     3)     5.00000000E-01  0.00000000E+00  0.00000000E+00       0.06250
-     4)     2.50000000E-01  2.50000000E-01  0.00000000E+00       0.09375
-     5)     5.00000000E-01  2.50000000E-01  0.00000000E+00       0.37500
-     6)    -2.50000000E-01  2.50000000E-01  0.00000000E+00       0.18750
-     7)     5.00000000E-01  5.00000000E-01  0.00000000E+00       0.04688
-     8)    -2.50000000E-01  5.00000000E-01  2.50000000E-01       0.09375
+     1)     0.00000000E+00  0.00000000E+00  0.00000000E+00       0.12500
+     2)     5.00000000E-01  0.00000000E+00  0.00000000E+00       0.50000
+     3)     5.00000000E-01  5.00000000E-01  0.00000000E+00       0.37500
 
  Together with 48 symmetry operations and time-reversal symmetry 
- yields    64 points in the full Brillouin Zone.
+ yields     8 points in the full Brillouin Zone.
 
 
- Optimal value for ng0sh: [1, 2, 1]
+ Optimal value for ng0sh: [1, 1, 1]
   Due to umklapp processes : ecutepspg0=    1.7324223067468310     
 
  setmesh: npwwfn        =     1067; Max (m1,m2,m3)   =      7     7     7
-          npweps/npwsigx=       15; Max (mm1,mm2,mm3)=      2     3     2
-          mG0 added     =   1  2  1
+          npweps/npwsigx=       15; Max (mm1,mm2,mm3)=      2     2     2
+          mG0 added     =   1  1  1
  calculated ecutwfn          =  43.311 [Ha] 
  calculated ecutsigx/ecuteps =   1.732 [Ha]
  using method =  2 with ecuteff =  62.367 [Ha]
@@ -1036,12 +960,12 @@ vmstk_mb:   0.00000000E+00
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 322
-vmrss_mb:   6.09804688E+01
-min_mpicomm_vmrss_mb:   6.09804688E+01
-max_mpicomm_vmrss_mb:   6.09804688E+01
+vmrss_mb:   5.85039062E+01
+min_mpicomm_vmrss_mb:   5.85039062E+01
+max_mpicomm_vmrss_mb:   5.85039062E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1053,23 +977,23 @@ vmstk_mb:   0.00000000E+00
   FFT algorithm .............................   512
   FFT cache size ............................    16
  Top of valence:  10.2211 (eV)
- Bottom of conduction:  14.6979 (eV)
- Fundamental gap:  4.4768 (eV)
+ Bottom of conduction:  15.0357 (eV)
+ Fundamental gap:  4.8146 (eV)
 
- Fermi level: 12.4595  (eV) 
+ Fermi level: 12.6284  (eV) 
 
- Memory needed for Fourier components u(G):      1.2 [Mb] <<< MEM
+ Memory needed for Fourier components u(G):      0.2 [Mb] <<< MEM
  Storing wavefunctions in single precision as `enable_gw_dpc="no"`
- Memory needed for real-space u(r):      8.8 [Mb] <<< MEM
+ Memory needed for real-space u(r):      3.3 [Mb] <<< MEM
  Memory needed for bks_tab:      0.0 [Mb] <<< MEM
- wfd_init , wall:  0.02 [s] , cpu:  0.02 [s] <<< TIME
+ wfd_init , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
  ==== Info on the wfd% object ====
-  Number of irreducible k-points ........ 8
+  Number of irreducible k-points ........ 3
   Number of spinorial components ........ 1
   Number of spin-density components ..... 1
   Number of spin polarizations .......... 1
   Plane wave cutoff energy ..............  45.0
-  Max number of G-vectors ............... 1124
+  Max number of G-vectors ............... 553
   Total number of FFT points ............ 8000
   Number of FFT points treated by me .... 8000
 
@@ -1080,8 +1004,8 @@ vmstk_mb:   0.00000000E+00
   FFT algorithm .............................   512
   FFT cache size ............................    16
 
-P Total number of (b,k,s) states stored by this rank: 144
-P Memory allocated for Fourier components u(G):      1.2 [Mb] <<< MEM
+P Total number of (b,k,s) states stored by this rank: 54
+P Memory allocated for Fourier components u(G):      0.2 [Mb] <<< MEM
 P Memory allocated for real-space u(r):      0.0 [Mb] <<< MEM
 P Memory needed for wfd%s datastructure:      0.0 [Mb] <<< MEM
 P Memory needed for wfd%s(0)%k datastructure:      0.0 [Mb] <<< MEM
@@ -1090,28 +1014,23 @@ P Memory allocated for Kdata array:      0.0 [Mb] <<< MEM
 
 
  wfd_read_wfk: Reading file: gwo_DS1_WFK.nc  with iomode: IO_MODE_ETSF , master_only: yes
- About to read: 144  (b, k, s) states in total.
- For spin: 1 , will read: 8  k-points out of: 8
-    Reading kpt [1/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [2/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [3/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [4/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [5/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
-    Reading kpt [6/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [7/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-    Reading kpt [8/8] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- WFK IO , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
+ About to read: 54  (b, k, s) states in total.
+ For spin: 1 , will read: 3  k-points out of: 3
+    Reading kpt [1/3] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+    Reading kpt [2/3] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+    Reading kpt [3/3] spin [1/1] , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+ WFK IO , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
 
 
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 642
-vmrss_mb:   6.51171875E+01
-min_mpicomm_vmrss_mb:   6.51171875E+01
-max_mpicomm_vmrss_mb:   6.51171875E+01
+vmrss_mb:   6.07265625E+01
+min_mpicomm_vmrss_mb:   6.07265625E+01
+max_mpicomm_vmrss_mb:   6.07265625E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1131,8 +1050,8 @@ message: |
  omega_plasma =   31.1085 [eV]
 
  Total charge density [el/Bohr^3]
-)     Maximum=    2.9658E-01  at reduced coord.    0.2000    0.2000    0.4333
-)     Minimum=    1.2736E-02  at reduced coord.    0.5000    0.5000    0.5000
+)     Maximum=    3.1352E-01  at reduced coord.    0.2000    0.2000    0.4333
+)     Minimum=    1.0213E-02  at reduced coord.    0.5000    0.5000    0.5000
    Integrated=    8.0000E+00
 
  1/G**2 cut-off applied in the following step : cutoff-mode = CRYSTAL
@@ -1144,12 +1063,12 @@ message: |
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1138
-vmrss_mb:   6.80351562E+01
-min_mpicomm_vmrss_mb:   6.80351562E+01
-max_mpicomm_vmrss_mb:   6.80351562E+01
+vmrss_mb:   6.40234375E+01
+min_mpicomm_vmrss_mb:   6.40234375E+01
+max_mpicomm_vmrss_mb:   6.40234375E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1162,12 +1081,12 @@ vmstk_mb:   0.00000000E+00
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1177
-vmrss_mb:   6.80468750E+01
-min_mpicomm_vmrss_mb:   6.80468750E+01
-max_mpicomm_vmrss_mb:   6.80468750E+01
+vmrss_mb:   6.40312500E+01
+min_mpicomm_vmrss_mb:   6.40312500E+01
+max_mpicomm_vmrss_mb:   6.40312500E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1178,13 +1097,13 @@ vmstk_mb:   0.00000000E+00
  Using spectral method for the imaginary part =  0
  Using symmetries to sum only over the IBZ_q  =  1
  Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 448 (b,b',k,s) states in chi0q0.
+ Memory needed for bbp_ks_distrb: 0.1  [Mb] <<< MEM
+ Will sum 168 (b,b',k,s) states in chi0q0.
  Calculating chi0(q=(0,0,0),omega,G,G")
 
  ==== Little Group Info ==== 
   External point: [ 0.0000E+00,  0.0000E+00,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  8/64
+  Number of points in the IBZ defined by little group:  3/8
   Number of operations in the little group: 96/48
   No time-reversal symmetry with zero umklapp: 48
   No time-reversal symmetry with non-zero umklapp:  0
@@ -1192,54 +1111,52 @@ vmstk_mb:   0.00000000E+00
   time-reversal symmetry with zero umklapp: 48
   time-reversal symmetry with non-zero umklapp:  0
 
- Calculation status: 8  k-points to be completed
+ Calculation status: 3  k-points to be completed
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_chi0.F90
 line: 507
-vmrss_mb:   6.80976562E+01
-min_mpicomm_vmrss_mb:   6.80976562E+01
-max_mpicomm_vmrss_mb:   6.80976562E+01
+vmrss_mb:   6.40859375E+01
+min_mpicomm_vmrss_mb:   6.40859375E+01
+max_mpicomm_vmrss_mb:   6.40859375E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
 
- chi0q0: ik_bz: 1/64, spin: 1 , wall:  0.02 [s] , cpu:  0.02 [s] <<< TIME
- chi0q0: ik_bz: 2/64, spin: 1 , wall:  0.02 [s] , cpu:  0.03 [s] <<< TIME
- chi0q0: ik_bz: 10/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0q0: ik_bz: 20/64, spin: 1 , wall:  0.02 [s] , cpu:  0.02 [s] <<< TIME
-cchi0q0 , wall:  0.20 [s] , cpu:  0.20 [s] <<< TIME
+ chi0q0: ik_bz: 1/8, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
+ chi0q0: ik_bz: 2/8, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
+cchi0q0 , wall:  0.04 [s] , cpu:  0.03 [s] <<< TIME
   chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
   chi0(q =  1, omega =   1, G,G')
        1       2       3       4       5       6       7       8       9
     1  -0.000   0.000  -0.000  -0.000   0.000   0.000  -0.000  -0.000   0.000
-       -0.000   0.000   0.000  -0.000  -0.000   0.000   0.000  -0.000  -0.000
+        0.000   0.000   0.000  -0.000  -0.000   0.000   0.000  -0.000  -0.000
 
-    2   0.000  -8.813  -0.000  -1.667  -0.000  -1.667   0.000  -1.667  -0.000
-       -0.000   0.000  -2.947  -0.000  -1.265   0.000  -1.265  -0.000  -1.265
+    2   0.000  -9.285  -0.000  -1.886   0.000  -1.887  -0.000  -1.886  -0.000
+       -0.000   0.000  -4.067   0.000  -1.542   0.000  -1.542  -0.000  -1.542
 
-    3  -0.000  -0.000  -8.813   0.000  -1.667  -0.000  -1.667  -0.000  -1.667
-       -0.000   2.947   0.000   1.265   0.000   1.265   0.000   1.265   0.000
+    3  -0.000  -0.000  -9.285   0.000  -1.886  -0.000  -1.887  -0.000  -1.886
+       -0.000   4.067   0.000   1.542  -0.000   1.542   0.000   1.542   0.000
 
-    4  -0.000  -1.667   0.000  -8.813  -0.000  -1.667   0.000  -1.667   0.000
-        0.000   0.000  -1.265   0.000  -2.947  -0.000  -1.265   0.000  -1.265
+    4  -0.000  -1.886   0.000  -9.285  -0.000  -1.886  -0.000  -1.887  -0.000
+        0.000  -0.000  -1.542   0.000  -4.067   0.000  -1.542  -0.000  -1.542
 
-    5   0.000  -0.000  -1.667  -0.000  -8.813  -0.000  -1.667  -0.000  -1.667
-        0.000   1.265  -0.000   2.947   0.000   1.265   0.000   1.265   0.000
+    5   0.000   0.000  -1.886  -0.000  -9.285  -0.000  -1.886  -0.000  -1.887
+        0.000   1.542   0.000   4.067   0.000   1.542   0.000   1.542   0.000
 
-    6   0.000  -1.667  -0.000  -1.667  -0.000  -8.813  -0.000  -1.667  -0.000
-       -0.000  -0.000  -1.265   0.000  -1.265   0.000  -2.947  -0.000  -1.265
+    6   0.000  -1.887  -0.000  -1.886  -0.000  -9.285  -0.000  -1.886  -0.000
+       -0.000  -0.000  -1.542  -0.000  -1.542   0.000  -4.067  -0.000  -1.542
 
-    7  -0.000   0.000  -1.667   0.000  -1.667  -0.000  -8.813   0.000  -1.667
-       -0.000   1.265  -0.000   1.265  -0.000   2.947   0.000   1.265   0.000
+    7  -0.000  -0.000  -1.887  -0.000  -1.886  -0.000  -9.285   0.000  -1.886
+       -0.000   1.542  -0.000   1.542  -0.000   4.067   0.000   1.542   0.000
 
-    8  -0.000  -1.667  -0.000  -1.667  -0.000  -1.667   0.000  -8.813  -0.000
-        0.000   0.000  -1.265  -0.000  -1.265   0.000  -1.265   0.000  -2.947
+    8  -0.000  -1.886  -0.000  -1.887  -0.000  -1.886   0.000  -9.285  -0.000
+        0.000   0.000  -1.542   0.000  -1.542   0.000  -1.542   0.000  -4.067
 
-    9   0.000  -0.000  -1.667   0.000  -1.667  -0.000  -1.667  -0.000  -8.813
-        0.000   1.265  -0.000   1.265  -0.000   1.265  -0.000   2.947   0.000
+    9   0.000  -0.000  -1.886  -0.000  -1.887  -0.000  -1.886  -0.000  -9.285
+        0.000   1.542  -0.000   1.542  -0.000   1.542  -0.000   4.067   0.000
 
   chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
   chi0(q =  1, omega =   2, G,G')
@@ -1247,46 +1164,46 @@ cchi0q0 , wall:  0.20 [s] , cpu:  0.20 [s] <<< TIME
     1  -0.000   0.000  -0.000  -0.000   0.000   0.000  -0.000  -0.000   0.000
         0.000   0.000   0.000  -0.000  -0.000   0.000   0.000  -0.000  -0.000
 
-    2   0.000  -4.072   0.000  -0.356  -0.000  -0.356   0.000  -0.356  -0.000
-       -0.000   0.000  -0.599   0.000  -0.200  -0.000  -0.200  -0.000  -0.200
+    2   0.000  -4.007  -0.000  -0.349   0.000  -0.350  -0.000  -0.350  -0.000
+       -0.000   0.000  -0.704   0.000  -0.203   0.000  -0.203  -0.000  -0.203
 
-    3  -0.000   0.000  -4.072  -0.000  -0.356  -0.000  -0.356   0.000  -0.356
-       -0.000   0.599   0.000   0.200   0.000   0.200  -0.000   0.200  -0.000
+    3  -0.000  -0.000  -4.007   0.000  -0.349  -0.000  -0.350  -0.000  -0.350
+       -0.000   0.704   0.000   0.203   0.000   0.203  -0.000   0.203   0.000
 
-    4  -0.000  -0.356  -0.000  -4.072   0.000  -0.356   0.000  -0.356  -0.000
-        0.000  -0.000  -0.200   0.000  -0.599   0.000  -0.200   0.000  -0.200
+    4  -0.000  -0.349   0.000  -4.007  -0.000  -0.349  -0.000  -0.350  -0.000
+        0.000  -0.000  -0.203   0.000  -0.704   0.000  -0.203  -0.000  -0.203
 
-    5   0.000  -0.000  -0.356   0.000  -4.072  -0.000  -0.356   0.000  -0.356
-        0.000   0.200  -0.000   0.599   0.000   0.200  -0.000   0.200   0.000
+    5   0.000   0.000  -0.349  -0.000  -4.007   0.000  -0.349  -0.000  -0.350
+        0.000   0.203  -0.000   0.704   0.000   0.203  -0.000   0.203   0.000
 
-    6   0.000  -0.356  -0.000  -0.356  -0.000  -4.072   0.000  -0.356  -0.000
-       -0.000   0.000  -0.200  -0.000  -0.200   0.000  -0.599  -0.000  -0.200
+    6   0.000  -0.350  -0.000  -0.349   0.000  -4.007   0.000  -0.349  -0.000
+       -0.000  -0.000  -0.203  -0.000  -0.203   0.000  -0.704  -0.000  -0.203
 
-    7  -0.000   0.000  -0.356   0.000  -0.356   0.000  -4.072   0.000  -0.356
-       -0.000   0.200   0.000   0.200   0.000   0.599   0.000   0.200   0.000
+    7  -0.000  -0.000  -0.350  -0.000  -0.349   0.000  -4.007  -0.000  -0.349
+       -0.000   0.203   0.000   0.203   0.000   0.704   0.000   0.203   0.000
 
-    8  -0.000  -0.356   0.000  -0.356   0.000  -0.356   0.000  -4.072   0.000
-        0.000   0.000  -0.200  -0.000  -0.200   0.000  -0.200   0.000  -0.599
+    8  -0.000  -0.350  -0.000  -0.350  -0.000  -0.349  -0.000  -4.007   0.000
+        0.000   0.000  -0.203   0.000  -0.203   0.000  -0.203   0.000  -0.704
 
-    9   0.000  -0.000  -0.356  -0.000  -0.356  -0.000  -0.356   0.000  -4.072
-        0.000   0.200   0.000   0.200  -0.000   0.200  -0.000   0.599   0.000
+    9   0.000  -0.000  -0.350  -0.000  -0.350  -0.000  -0.349   0.000  -4.007
+        0.000   0.203  -0.000   0.203  -0.000   0.203  -0.000   0.704   0.000
 
  Analyzing long wavelength limit for several q
  make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
  For q-point:  0.000010 0.000020 0.000030
-  dielectric constant =   7.2312
-  dielectric constant without local fields =   7.4025
+  dielectric constant =  15.4394
+  dielectric constant without local fields =  15.9265
 
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    1 :     95.92  [%]
+  Average fulfillment of the sum rule on Im[epsilon] for q-point    1 :     96.37  [%]
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1539
-vmrss_mb:   6.98632812E+01
-min_mpicomm_vmrss_mb:   6.98632812E+01
-max_mpicomm_vmrss_mb:   6.98632812E+01
+vmrss_mb:   6.45976562E+01
+min_mpicomm_vmrss_mb:   6.45976562E+01
+max_mpicomm_vmrss_mb:   6.45976562E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1295,17 +1212,17 @@ vmstk_mb:   0.00000000E+00
 
 
 --------------------------------------------------------------------------------
-  q-point number  2        q = ( 0.250000, 0.000000, 0.000000) [r.l.u.]
+  q-point number  2        q = ( 0.500000, 0.000000, 0.000000) [r.l.u.]
 --------------------------------------------------------------------------------
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1177
-vmrss_mb:   7.02539062E+01
-min_mpicomm_vmrss_mb:   7.02539062E+01
-max_mpicomm_vmrss_mb:   7.02539062E+01
+vmrss_mb:   6.46679688E+01
+min_mpicomm_vmrss_mb:   6.46679688E+01
+max_mpicomm_vmrss_mb:   6.46679688E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1313,148 +1230,13 @@ vmstk_mb:   0.00000000E+00
  Using spectral method for the imaginary part =  0
  Using symmetries to sum only over the IBZ_q  =  1
  Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 1120 (b,b',k,s) states in chi0.
- Calculating chi0(q,omega,G,G")
-
- ==== Little Group Info ==== 
-  External point: [ 2.5000E-01,  0.0000E+00,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  20/64
-  Number of operations in the little group: 12/48
-  No time-reversal symmetry with zero umklapp:  6
-  No time-reversal symmetry with non-zero umklapp:  0
-
-  time-reversal symmetry with zero umklapp:  6
-  time-reversal symmetry with non-zero umklapp:  0
-
- Calculation status: 20 k-points to be completed
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_chi0.F90
-line: 1408
-vmrss_mb:   7.05703125E+01
-min_mpicomm_vmrss_mb:   7.05703125E+01
-max_mpicomm_vmrss_mb:   7.05703125E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 4/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 5/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- ...
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 15/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 45/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
-cchi0 , wall:  0.11 [s] , cpu:  0.11 [s] <<< TIME
-  chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  2, omega =   1, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -3.058  -0.719   0.605  -0.508  -0.705  -0.508  -0.705  -0.508  -0.705
-        0.000  -0.719  -0.605  -0.508   0.705  -0.508   0.705  -0.508   0.705
-
-    2  -0.719  -8.608   0.000  -1.577   0.000  -1.577  -0.000  -1.577   0.000
-        0.719   0.000  -2.627   0.000  -0.954   0.000  -0.954   0.000  -0.954
-
-    3   0.605   0.000  -7.902   0.000  -1.272  -0.000  -1.272   0.000  -1.272
-        0.605   2.627   0.000   1.089  -0.000   1.089  -0.000   1.090   0.000
-
-    4  -0.508  -1.577   0.000  -8.896   0.000  -1.534  -0.000  -1.534   0.000
-        0.508  -0.000  -1.089   0.000  -2.286  -0.000  -0.852   0.000  -0.852
-
-    5  -0.705   0.000  -1.272   0.000  -8.780  -0.000  -1.657  -0.000  -1.657
-       -0.705   0.954   0.000   2.286   0.000   0.852   0.000   0.852   0.000
-
-    6  -0.508  -1.577  -0.000  -1.534  -0.000  -8.896  -0.000  -1.534   0.000
-        0.508  -0.000  -1.089   0.000  -0.852   0.000  -2.286   0.000  -0.852
-
-    7  -0.705  -0.000  -1.272  -0.000  -1.657  -0.000  -8.780  -0.000  -1.657
-       -0.705   0.954   0.000   0.852  -0.000   2.286   0.000   0.852   0.000
-
-    8  -0.508  -1.577   0.000  -1.534  -0.000  -1.534  -0.000  -8.896   0.000
-        0.508  -0.000  -1.090  -0.000  -0.852  -0.000  -0.852   0.000  -2.286
-
-    9  -0.705   0.000  -1.272   0.000  -1.657   0.000  -1.657   0.000  -8.780
-       -0.705   0.954  -0.000   0.852  -0.000   0.852  -0.000   2.286   0.000
-
-  chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  2, omega =   2, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -0.620  -0.234   0.170  -0.047  -0.164  -0.047  -0.164  -0.047  -0.164
-        0.000  -0.234  -0.170  -0.047   0.164  -0.047   0.164  -0.047   0.164
-
-    2  -0.234  -4.385   0.000  -0.344  -0.000  -0.345  -0.000  -0.344   0.000
-        0.234   0.000  -0.552   0.000  -0.184   0.000  -0.184  -0.000  -0.184
-
-    3   0.170   0.000  -3.243  -0.000  -0.319  -0.000  -0.319  -0.000  -0.319
-        0.170   0.552   0.000   0.167   0.000   0.167   0.000   0.167   0.000
-
-    4  -0.047  -0.344  -0.000  -3.953  -0.000  -0.361  -0.000  -0.361   0.000
-        0.047  -0.000  -0.167   0.000  -0.527  -0.000  -0.166  -0.000  -0.166
-
-    5  -0.164  -0.000  -0.319  -0.000  -4.275  -0.000  -0.366   0.000  -0.366
-       -0.164   0.184  -0.000   0.527   0.000   0.166  -0.000   0.166  -0.000
-
-    6  -0.047  -0.345  -0.000  -0.361  -0.000  -3.953  -0.000  -0.361   0.000
-        0.047  -0.000  -0.167   0.000  -0.166   0.000  -0.527   0.000  -0.166
-
-    7  -0.164  -0.000  -0.319  -0.000  -0.366  -0.000  -4.275  -0.000  -0.366
-       -0.164   0.184  -0.000   0.166   0.000   0.527   0.000   0.166  -0.000
-
-    8  -0.047  -0.344  -0.000  -0.361   0.000  -0.361  -0.000  -3.953  -0.000
-        0.047   0.000  -0.167   0.000  -0.166  -0.000  -0.166   0.000  -0.527
-
-    9  -0.164   0.000  -0.319   0.000  -0.366   0.000  -0.366  -0.000  -4.275
-       -0.164   0.184  -0.000   0.166   0.000   0.166   0.000   0.527   0.000
-
- make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    2 :     97.92  [%]
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1539
-vmrss_mb:   7.05937500E+01
-min_mpicomm_vmrss_mb:   7.05937500E+01
-max_mpicomm_vmrss_mb:   7.05937500E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
-
-
---------------------------------------------------------------------------------
-  q-point number  3        q = ( 0.500000, 0.000000, 0.000000) [r.l.u.]
---------------------------------------------------------------------------------
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1177
-vmrss_mb:   7.05937500E+01
-min_mpicomm_vmrss_mb:   7.05937500E+01
-max_mpicomm_vmrss_mb:   7.05937500E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- Using spectral method for the imaginary part =  0
- Using symmetries to sum only over the IBZ_q  =  1
- Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 1120 (b,b',k,s) states in chi0.
+ Memory needed for bbp_ks_distrb: 0.1  [Mb] <<< MEM
+ Will sum 224 (b,b',k,s) states in chi0.
  Calculating chi0(q,omega,G,G")
 
  ==== Little Group Info ==== 
   External point: [ 5.0000E-01,  0.0000E+00,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  20/64
+  Number of points in the IBZ defined by little group:  4/8
   Number of operations in the little group: 12/48
   No time-reversal symmetry with zero umklapp:  6
   No time-reversal symmetry with non-zero umklapp:  0
@@ -1462,102 +1244,95 @@ vmstk_mb:   0.00000000E+00
   time-reversal symmetry with zero umklapp:  6
   time-reversal symmetry with non-zero umklapp:  0
 
- Calculation status: 20 k-points to be completed
+ Calculation status: 4 k-points to be completed
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_chi0.F90
 line: 1408
-vmrss_mb:   7.05937500E+01
-min_mpicomm_vmrss_mb:   7.05937500E+01
-max_mpicomm_vmrss_mb:   7.05937500E+01
+vmrss_mb:   6.46796875E+01
+min_mpicomm_vmrss_mb:   6.46796875E+01
+max_mpicomm_vmrss_mb:   6.46796875E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
 
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 4/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 5/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- ...
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 15/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 45/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-cchi0 , wall:  0.11 [s] , cpu:  0.09 [s] <<< TIME
+ chi0: ik_bz: 1/8, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+ chi0: ik_bz: 2/8, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+ chi0: ik_bz: 3/8, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
+cchi0 , wall:  0.02 [s] , cpu:  0.02 [s] <<< TIME
   chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  3, omega =   1, G,G')
+  chi0(q =  2, omega =   1, G,G')
        1       2       3       4       5       6       7       8       9
-    1  -6.231  -1.017   0.730  -1.324  -1.078  -1.324  -1.078  -1.324  -1.078
-        0.000  -1.017  -0.730  -1.324   1.078  -1.324   1.078  -1.324   1.078
+    1  -6.379  -1.155   1.233  -1.435  -1.229  -1.435  -1.229  -1.435  -1.229
+        0.000  -1.155  -1.233  -1.435   1.229  -1.435   1.229  -1.435   1.229
 
-    2  -1.017  -7.354   0.000  -0.992  -0.000  -0.992   0.000  -0.992  -0.000
-        1.017   0.000  -2.145  -0.000  -0.577  -0.000  -0.577   0.000  -0.577
+    2  -1.155  -7.837  -0.000  -1.255  -0.000  -1.255  -0.000  -1.255  -0.000
+        1.155   0.000  -2.902  -0.000  -0.709  -0.000  -0.709  -0.000  -0.709
 
-    3   0.730   0.000  -6.231  -0.000  -0.917  -0.000  -0.917  -0.000  -0.917
-        0.730   2.145   0.000   0.674   0.000   0.674  -0.000   0.674  -0.000
+    3   1.233  -0.000  -6.379  -0.000  -0.685  -0.000  -0.685  -0.000  -0.685
+        1.233   2.902   0.000   0.857   0.000   0.857   0.000   0.857   0.000
 
-    4  -1.324  -0.992  -0.000  -9.216   0.000  -1.665  -0.000  -1.665  -0.000
-        1.324   0.000  -0.674   0.000  -1.525   0.000  -0.424  -0.000  -0.424
+    4  -1.435  -1.255  -0.000  -9.929   0.000  -1.680   0.000  -1.680  -0.000
+        1.435   0.000  -0.857   0.000  -2.021   0.000  -0.471   0.000  -0.471
 
-    5  -1.078  -0.000  -0.917   0.000  -8.162  -0.000  -1.135  -0.000  -1.135
-       -1.078   0.577  -0.000   1.525   0.000   0.424  -0.000   0.424   0.000
+    5  -1.229  -0.000  -0.685   0.000  -8.509   0.000  -1.319  -0.000  -1.320
+       -1.229   0.709  -0.000   2.021   0.000   0.471   0.000   0.471   0.000
 
-    6  -1.324  -0.992  -0.000  -1.665  -0.000  -9.216  -0.000  -1.665  -0.000
-        1.324   0.000  -0.674  -0.000  -0.424   0.000  -1.525  -0.000  -0.424
+    6  -1.435  -1.255  -0.000  -1.680   0.000  -9.929  -0.000  -1.680  -0.000
+        1.435   0.000  -0.857  -0.000  -0.471   0.000  -2.021  -0.000  -0.471
 
-    7  -1.078   0.000  -0.917  -0.000  -1.135  -0.000  -8.162  -0.000  -1.135
-       -1.078   0.577   0.000   0.424   0.000   1.525   0.000   0.424   0.000
+    7  -1.229  -0.000  -0.685   0.000  -1.319  -0.000  -8.507  -0.000  -1.319
+       -1.229   0.709  -0.000   0.471  -0.000   2.021   0.000   0.471  -0.000
 
-    8  -1.324  -0.992  -0.000  -1.665  -0.000  -1.665  -0.000  -9.216   0.000
-        1.324  -0.000  -0.674   0.000  -0.424   0.000  -0.424   0.000  -1.525
+    8  -1.435  -1.255  -0.000  -1.680  -0.000  -1.680  -0.000  -9.929   0.000
+        1.435   0.000  -0.857  -0.000  -0.471   0.000  -0.471   0.000  -2.021
 
-    9  -1.078  -0.000  -0.917  -0.000  -1.135  -0.000  -1.135   0.000  -8.162
-       -1.078   0.577   0.000   0.424  -0.000   0.424  -0.000   1.525   0.000
+    9  -1.229  -0.000  -0.685  -0.000  -1.320  -0.000  -1.319   0.000  -8.508
+       -1.229   0.709  -0.000   0.471  -0.000   0.471   0.000   2.021   0.000
 
   chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  3, omega =   2, G,G')
+  chi0(q =  2, omega =   2, G,G')
        1       2       3       4       5       6       7       8       9
-    1  -1.969  -0.431   0.228  -0.271  -0.393  -0.271  -0.393  -0.271  -0.393
-        0.000  -0.431  -0.228  -0.271   0.393  -0.271   0.393  -0.271   0.393
+    1  -1.918  -0.479   0.256  -0.276  -0.412  -0.276  -0.412  -0.276  -0.412
+        0.000  -0.479  -0.256  -0.276   0.412  -0.276   0.412  -0.276   0.412
 
-    2  -0.431  -4.154   0.000  -0.280  -0.000  -0.280   0.000  -0.280  -0.000
-        0.431   0.000  -0.417  -0.000  -0.149  -0.000  -0.149   0.000  -0.148
+    2  -0.479  -4.083  -0.000  -0.309  -0.000  -0.309  -0.000  -0.309  -0.000
+        0.479   0.000  -0.491  -0.000  -0.139  -0.000  -0.139  -0.000  -0.138
 
-    3   0.228   0.000  -1.969   0.000  -0.241  -0.000  -0.241   0.000  -0.241
-        0.228   0.417   0.000   0.091  -0.000   0.091  -0.000   0.091   0.000
+    3   0.256  -0.000  -1.918  -0.000  -0.231  -0.000  -0.231  -0.000  -0.231
+        0.256   0.491   0.000   0.098   0.000   0.098   0.000   0.098   0.000
 
-    4  -0.271  -0.280   0.000  -4.020   0.000  -0.412  -0.000  -0.412  -0.000
-        0.271   0.000  -0.091   0.000  -0.363   0.000  -0.096  -0.000  -0.096
+    4  -0.276  -0.309  -0.000  -3.964   0.000  -0.411  -0.000  -0.411  -0.000
+        0.276   0.000  -0.098   0.000  -0.427   0.000  -0.093  -0.000  -0.093
 
-    5  -0.393  -0.000  -0.241   0.000  -4.377  -0.000  -0.332  -0.000  -0.332
-       -0.393   0.149   0.000   0.363   0.000   0.096  -0.000   0.096   0.000
+    5  -0.412  -0.000  -0.231   0.000  -4.310  -0.000  -0.350  -0.000  -0.350
+       -0.412   0.139  -0.000   0.427   0.000   0.093  -0.000   0.093   0.000
 
-    6  -0.271  -0.280  -0.000  -0.412  -0.000  -4.020  -0.000  -0.412  -0.000
-        0.271   0.000  -0.091  -0.000  -0.096   0.000  -0.363  -0.000  -0.096
+    6  -0.276  -0.309  -0.000  -0.411  -0.000  -3.964  -0.000  -0.411  -0.000
+        0.276   0.000  -0.098  -0.000  -0.093   0.000  -0.427  -0.000  -0.093
 
-    7  -0.393   0.000  -0.241  -0.000  -0.332  -0.000  -4.376  -0.000  -0.332
-       -0.393   0.149   0.000   0.096   0.000   0.363   0.000   0.096   0.000
+    7  -0.412  -0.000  -0.231  -0.000  -0.350  -0.000  -4.308  -0.000  -0.349
+       -0.412   0.139  -0.000   0.093   0.000   0.427   0.000   0.093   0.000
 
-    8  -0.271  -0.280   0.000  -0.412  -0.000  -0.412  -0.000  -4.020   0.000
-        0.271  -0.000  -0.091   0.000  -0.096   0.000  -0.096   0.000  -0.363
+    8  -0.276  -0.309  -0.000  -0.411  -0.000  -0.411  -0.000  -3.964   0.000
+        0.276   0.000  -0.098   0.000  -0.093   0.000  -0.093   0.000  -0.427
 
-    9  -0.393  -0.000  -0.241  -0.000  -0.332  -0.000  -0.332   0.000  -4.376
-       -0.393   0.148  -0.000   0.096  -0.000   0.096  -0.000   0.363   0.000
+    9  -0.412  -0.000  -0.231  -0.000  -0.350  -0.000  -0.349   0.000  -4.309
+       -0.412   0.138  -0.000   0.093  -0.000   0.093  -0.000   0.427   0.000
 
  make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    3 :     96.88  [%]
+  Average fulfillment of the sum rule on Im[epsilon] for q-point    2 :     97.41  [%]
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1539
-vmrss_mb:   7.05937500E+01
-min_mpicomm_vmrss_mb:   7.05937500E+01
-max_mpicomm_vmrss_mb:   7.05937500E+01
+vmrss_mb:   6.47031250E+01
+min_mpicomm_vmrss_mb:   6.47031250E+01
+max_mpicomm_vmrss_mb:   6.47031250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1565,17 +1340,17 @@ vmstk_mb:   0.00000000E+00
 
 
 --------------------------------------------------------------------------------
-  q-point number  4        q = ( 0.250000, 0.250000, 0.000000) [r.l.u.]
+  q-point number  3        q = ( 0.500000, 0.500000, 0.000000) [r.l.u.]
 --------------------------------------------------------------------------------
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1177
-vmrss_mb:   7.05937500E+01
-min_mpicomm_vmrss_mb:   7.05937500E+01
-max_mpicomm_vmrss_mb:   7.05937500E+01
+vmrss_mb:   6.47031250E+01
+min_mpicomm_vmrss_mb:   6.47031250E+01
+max_mpicomm_vmrss_mb:   6.47031250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
@@ -1583,416 +1358,13 @@ vmstk_mb:   0.00000000E+00
  Using spectral method for the imaginary part =  0
  Using symmetries to sum only over the IBZ_q  =  1
  Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 1008 (b,b',k,s) states in chi0.
- Calculating chi0(q,omega,G,G")
-
- ==== Little Group Info ==== 
-  External point: [ 2.5000E-01,  2.5000E-01,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  18/64
-  Number of operations in the little group: 16/48
-  No time-reversal symmetry with zero umklapp:  8
-  No time-reversal symmetry with non-zero umklapp:  0
-
-  time-reversal symmetry with zero umklapp:  8
-  time-reversal symmetry with non-zero umklapp:  0
-
- Calculation status: 18 k-points to be completed
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_chi0.F90
-line: 1408
-vmrss_mb:   7.06914062E+01
-min_mpicomm_vmrss_mb:   7.06914062E+01
-max_mpicomm_vmrss_mb:   7.06914062E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 15/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-cchi0 , wall:  0.10 [s] , cpu:  0.11 [s] <<< TIME
-  chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  4, omega =   1, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -3.982  -0.938  -0.300  -0.300  -0.938  -0.300  -0.938  -0.938  -0.300
-        0.000  -0.938   0.300  -0.300   0.938  -0.300   0.938  -0.938   0.300
-
-    2  -0.938  -8.733   0.000  -1.540   0.000  -1.540  -0.000  -1.594   0.000
-        0.938   0.000  -2.183  -0.000  -0.805  -0.000  -0.805   0.000  -0.877
-
-    3  -0.300   0.000  -8.602  -0.000  -1.540  -0.000  -1.540  -0.000  -0.968
-       -0.300   2.183   0.000   0.810   0.000   0.810   0.000   0.877  -0.000
-
-    4  -0.300  -1.540  -0.000  -8.602   0.000  -0.968  -0.000  -1.540  -0.000
-        0.300   0.000  -0.810   0.000  -2.183   0.000  -0.877   0.000  -0.810
-
-    5  -0.938   0.000  -1.540   0.000  -8.733  -0.000  -1.594  -0.000  -1.540
-       -0.938   0.805  -0.000   2.183   0.000   0.877   0.000   0.805  -0.000
-
-    6  -0.300  -1.540  -0.000  -0.968  -0.000  -8.602  -0.000  -1.540  -0.000
-        0.300   0.000  -0.810  -0.000  -0.877   0.000  -2.183   0.000  -0.810
-
-    7  -0.938  -0.000  -1.540  -0.000  -1.594  -0.000  -8.733   0.000  -1.540
-       -0.938   0.805  -0.000   0.877  -0.000   2.183   0.000   0.805  -0.000
-
-    8  -0.938  -1.594  -0.000  -1.540  -0.000  -1.540   0.000  -8.733   0.000
-        0.938  -0.000  -0.877  -0.000  -0.805  -0.000  -0.805   0.000  -2.183
-
-    9  -0.300   0.000  -0.968  -0.000  -1.540  -0.000  -1.540   0.000  -8.602
-       -0.300   0.877   0.000   0.810   0.000   0.810   0.000   2.183   0.000
-
-  chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  4, omega =   2, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -0.810  -0.234   0.004   0.004  -0.234   0.004  -0.234  -0.234   0.004
-        0.000  -0.234  -0.004   0.004   0.234   0.004   0.234  -0.234  -0.004
-
-    2  -0.234  -4.361   0.000  -0.353   0.000  -0.353  -0.000  -0.347   0.000
-        0.234   0.000  -0.512  -0.000  -0.173  -0.000  -0.173   0.000  -0.166
-
-    3   0.004   0.000  -3.705  -0.000  -0.353  -0.000  -0.353  -0.000  -0.309
-        0.004   0.512   0.000   0.144   0.000   0.144  -0.000   0.166  -0.000
-
-    4   0.004  -0.353  -0.000  -3.705  -0.000  -0.309   0.000  -0.353  -0.000
-       -0.004   0.000  -0.144   0.000  -0.512   0.000  -0.166   0.000  -0.144
-
-    5  -0.234   0.000  -0.353  -0.000  -4.361  -0.000  -0.346  -0.000  -0.353
-       -0.234   0.173  -0.000   0.512   0.000   0.166   0.000   0.173  -0.000
-
-    6   0.004  -0.353  -0.000  -0.309  -0.000  -3.705  -0.000  -0.353   0.000
-       -0.004   0.000  -0.144  -0.000  -0.166   0.000  -0.512   0.000  -0.144
-
-    7  -0.234  -0.000  -0.353   0.000  -0.346  -0.000  -4.361   0.000  -0.353
-       -0.234   0.173   0.000   0.166  -0.000   0.512   0.000   0.173  -0.000
-
-    8  -0.234  -0.347  -0.000  -0.353  -0.000  -0.353   0.000  -4.361  -0.000
-        0.234  -0.000  -0.166  -0.000  -0.173  -0.000  -0.173   0.000  -0.512
-
-    9   0.004   0.000  -0.309  -0.000  -0.353   0.000  -0.353  -0.000  -3.705
-        0.004   0.166   0.000   0.144   0.000   0.144   0.000   0.512   0.000
-
- make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    4 :     97.75  [%]
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1539
-vmrss_mb:   7.06914062E+01
-min_mpicomm_vmrss_mb:   7.06914062E+01
-max_mpicomm_vmrss_mb:   7.06914062E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
-
-
---------------------------------------------------------------------------------
-  q-point number  5        q = ( 0.500000, 0.250000, 0.000000) [r.l.u.]
---------------------------------------------------------------------------------
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1177
-vmrss_mb:   7.06914062E+01
-min_mpicomm_vmrss_mb:   7.06914062E+01
-max_mpicomm_vmrss_mb:   7.06914062E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- Using spectral method for the imaginary part =  0
- Using symmetries to sum only over the IBZ_q  =  1
- Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 2240 (b,b',k,s) states in chi0.
- Calculating chi0(q,omega,G,G")
-
- ==== Little Group Info ==== 
-  External point: [ 5.0000E-01,  2.5000E-01,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  40/64
-  Number of operations in the little group: 4/48
-  No time-reversal symmetry with zero umklapp:  2
-  No time-reversal symmetry with non-zero umklapp:  0
-
-  time-reversal symmetry with zero umklapp:  2
-  time-reversal symmetry with non-zero umklapp:  0
-
- Calculation status: 40 k-points to be completed
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_chi0.F90
-line: 1408
-vmrss_mb:   7.08710938E+01
-min_mpicomm_vmrss_mb:   7.08710938E+01
-max_mpicomm_vmrss_mb:   7.08710938E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 4/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 5/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- ...
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 15/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 30/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 35/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 45/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 50/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 60/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
-cchi0 , wall:  0.18 [s] , cpu:  0.19 [s] <<< TIME
-  chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  5, omega =   1, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -6.708  -1.135  -0.157  -1.055  -1.244  -1.055  -1.244  -1.439  -1.045
-        0.000  -1.135   0.157  -1.055   1.244  -1.055   1.244  -1.439   1.045
-
-    2  -1.135  -7.713   0.000  -1.109   0.000  -1.109  -0.000  -1.102   0.000
-        1.135   0.000  -1.896   0.000  -0.557  -0.000  -0.557  -0.000  -0.556
-
-    3  -0.157   0.000  -7.719  -0.000  -1.239   0.000  -1.239  -0.000  -0.690
-       -0.157   1.896   0.000   0.495   0.000   0.495   0.000   0.500  -0.000
-
-    4  -1.055  -1.109  -0.000  -8.912   0.000  -1.123  -0.000  -1.525  -0.000
-        1.055  -0.000  -0.495   0.000  -1.563   0.000  -0.488  -0.000  -0.286
-
-    5  -1.244   0.000  -1.239   0.000  -8.176  -0.000  -1.169  -0.000  -1.205
-       -1.244   0.557  -0.000   1.563   0.000   0.488   0.000   0.460   0.000
-
-    6  -1.055  -1.109   0.000  -1.123  -0.000  -8.912   0.000  -1.525  -0.000
-        1.055   0.000  -0.495  -0.000  -0.488   0.000  -1.563  -0.000  -0.286
-
-    7  -1.244  -0.000  -1.239  -0.000  -1.169   0.000  -8.176   0.000  -1.205
-       -1.244   0.557  -0.000   0.488  -0.000   1.563   0.000   0.460   0.000
-
-    8  -1.439  -1.102  -0.000  -1.525  -0.000  -1.525   0.000  -8.718  -0.000
-        1.439   0.000  -0.500   0.000  -0.460   0.000  -0.460   0.000  -1.353
-
-    9  -1.045   0.000  -0.690  -0.000  -1.205  -0.000  -1.205  -0.000  -8.513
-       -1.045   0.556   0.000   0.286  -0.000   0.286  -0.000   1.353   0.000
-
-  chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  5, omega =   2, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -1.866  -0.418   0.084  -0.163  -0.401  -0.163  -0.401  -0.373  -0.285
-        0.000  -0.418  -0.084  -0.163   0.401  -0.163   0.401  -0.373   0.285
-
-    2  -0.418  -4.265   0.000  -0.296   0.000  -0.296  -0.000  -0.298   0.000
-        0.418   0.000  -0.413   0.000  -0.149  -0.000  -0.149  -0.000  -0.138
-
-    3   0.084   0.000  -2.688  -0.000  -0.289  -0.000  -0.289  -0.000  -0.270
-        0.084   0.413   0.000   0.074   0.000   0.074   0.000   0.109  -0.000
-
-    4  -0.163  -0.296  -0.000  -3.690   0.000  -0.329  -0.000  -0.387  -0.000
-        0.163  -0.000  -0.074   0.000  -0.385   0.000  -0.116   0.000  -0.068
-
-    5  -0.401   0.000  -0.289   0.000  -4.375  -0.000  -0.308  -0.000  -0.350
-       -0.401   0.149  -0.000   0.385   0.000   0.116  -0.000   0.123   0.000
-
-    6  -0.163  -0.296  -0.000  -0.329  -0.000  -3.690   0.000  -0.387  -0.000
-        0.163   0.000  -0.074  -0.000  -0.116   0.000  -0.385   0.000  -0.068
-
-    7  -0.401  -0.000  -0.289  -0.000  -0.308   0.000  -4.375   0.000  -0.350
-       -0.401   0.149  -0.000   0.116   0.000   0.385   0.000   0.123  -0.000
-
-    8  -0.373  -0.298  -0.000  -0.387  -0.000  -0.387   0.000  -4.370  -0.000
-        0.373   0.000  -0.109  -0.000  -0.123  -0.000  -0.123   0.000  -0.370
-
-    9  -0.285   0.000  -0.270  -0.000  -0.350  -0.000  -0.350  -0.000  -4.152
-       -0.285   0.138   0.000   0.068  -0.000   0.068   0.000   0.370   0.000
-
- make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    5 :     96.85  [%]
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1539
-vmrss_mb:   7.08710938E+01
-min_mpicomm_vmrss_mb:   7.08710938E+01
-max_mpicomm_vmrss_mb:   7.08710938E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
-
-
---------------------------------------------------------------------------------
-  q-point number  6        q = (-0.250000, 0.250000, 0.000000) [r.l.u.]
---------------------------------------------------------------------------------
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1177
-vmrss_mb:   7.08710938E+01
-min_mpicomm_vmrss_mb:   7.08710938E+01
-max_mpicomm_vmrss_mb:   7.08710938E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- Using spectral method for the imaginary part =  0
- Using symmetries to sum only over the IBZ_q  =  1
- Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 1456 (b,b',k,s) states in chi0.
- Calculating chi0(q,omega,G,G")
-
- ==== Little Group Info ==== 
-  External point: [-2.5000E-01,  2.5000E-01,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  26/64
-  Number of operations in the little group: 8/48
-  No time-reversal symmetry with zero umklapp:  4
-  No time-reversal symmetry with non-zero umklapp:  0
-
-  time-reversal symmetry with zero umklapp:  4
-  time-reversal symmetry with non-zero umklapp:  0
-
- Calculation status: 26 k-points to be completed
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_chi0.F90
-line: 1408
-vmrss_mb:   7.08710938E+01
-min_mpicomm_vmrss_mb:   7.08710938E+01
-max_mpicomm_vmrss_mb:   7.08710938E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 4/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 45/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 60/64, spin: 1 , wall:  0.01 [s] , cpu:  0.02 [s] <<< TIME
-cchi0 , wall:  0.16 [s] , cpu:  0.16 [s] <<< TIME
-  chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  6, omega =   1, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -5.706  -0.201  -1.019  -1.155  -1.155  -1.155  -1.155  -1.019  -0.201
-        0.000  -0.201   1.019  -1.155   1.155  -1.155   1.155  -1.019   0.201
-
-    2  -0.201  -8.260   0.000  -1.259  -0.000  -1.259  -0.000  -1.221  -0.000
-        0.201   0.000  -2.073   0.000  -0.576   0.000  -0.576   0.000  -0.966
-
-    3  -1.019   0.000  -8.115   0.000  -1.286   0.000  -1.286  -0.000  -1.221
-       -1.019   2.073   0.000   0.639   0.000   0.639  -0.000   0.718  -0.000
-
-    4  -1.155  -1.259   0.000  -8.809   0.000  -1.524   0.000  -1.286  -0.000
-        1.155  -0.000  -0.639   0.000  -1.594   0.000  -0.458   0.000  -0.576
-
-    5  -1.155  -0.000  -1.286   0.000  -8.809   0.000  -1.524  -0.000  -1.259
-       -1.155   0.576  -0.000   1.594   0.000   0.458  -0.000   0.639  -0.000
-
-    6  -1.155  -1.259   0.000  -1.524   0.000  -8.809  -0.000  -1.286  -0.000
-        1.155  -0.000  -0.639  -0.000  -0.458   0.000  -1.594   0.000  -0.576
-
-    7  -1.155  -0.000  -1.286   0.000  -1.524  -0.000  -8.809  -0.000  -1.259
-       -1.155   0.576   0.000   0.458   0.000   1.594   0.000   0.639   0.000
-
-    8  -1.019  -1.221  -0.000  -1.286  -0.000  -1.286  -0.000  -8.115  -0.000
-        1.019  -0.000  -0.718  -0.000  -0.639  -0.000  -0.639   0.000  -2.073
-
-    9  -0.201  -0.000  -1.221  -0.000  -1.259  -0.000  -1.259  -0.000  -8.260
-       -0.201   0.966   0.000   0.576   0.000   0.576  -0.000   2.073   0.000
-
-  chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  6, omega =   2, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -1.454   0.067  -0.359  -0.263  -0.263  -0.263  -0.263  -0.359   0.067
-        0.000   0.067   0.359  -0.263   0.263  -0.263   0.263  -0.359  -0.067
-
-    2   0.067  -3.075   0.000  -0.326  -0.000  -0.326  -0.000  -0.289  -0.000
-       -0.067   0.000  -0.457  -0.000  -0.117  -0.000  -0.117  -0.000  -0.114
-
-    3  -0.359   0.000  -4.354   0.000  -0.327  -0.000  -0.327  -0.000  -0.289
-       -0.359   0.457   0.000   0.149   0.000   0.149   0.000   0.166  -0.000
-
-    4  -0.263  -0.326   0.000  -4.246   0.000  -0.394   0.000  -0.327  -0.000
-        0.263   0.000  -0.149   0.000  -0.421  -0.000  -0.114   0.000  -0.117
-
-    5  -0.263  -0.000  -0.327   0.000  -4.246   0.000  -0.394   0.000  -0.326
-       -0.263   0.117  -0.000   0.421   0.000   0.113   0.000   0.149   0.000
-
-    6  -0.263  -0.326  -0.000  -0.394   0.000  -4.246  -0.000  -0.327  -0.000
-        0.263   0.000  -0.149   0.000  -0.113   0.000  -0.421   0.000  -0.117
-
-    7  -0.263  -0.000  -0.327   0.000  -0.394  -0.000  -4.246  -0.000  -0.326
-       -0.263   0.117  -0.000   0.114  -0.000   0.421   0.000   0.149   0.000
-
-    8  -0.359  -0.289  -0.000  -0.327   0.000  -0.327  -0.000  -4.353  -0.000
-        0.359   0.000  -0.166  -0.000  -0.149  -0.000  -0.149   0.000  -0.457
-
-    9   0.067  -0.000  -0.289  -0.000  -0.326  -0.000  -0.326  -0.000  -3.075
-        0.067   0.114   0.000   0.117  -0.000   0.117  -0.000   0.457   0.000
-
- make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    6 :     97.10  [%]
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1539
-vmrss_mb:   7.09257812E+01
-min_mpicomm_vmrss_mb:   7.09257812E+01
-max_mpicomm_vmrss_mb:   7.09257812E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
-
-
---------------------------------------------------------------------------------
-  q-point number  7        q = ( 0.500000, 0.500000, 0.000000) [r.l.u.]
---------------------------------------------------------------------------------
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1177
-vmrss_mb:   7.09257812E+01
-min_mpicomm_vmrss_mb:   7.09257812E+01
-max_mpicomm_vmrss_mb:   7.09257812E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- Using spectral method for the imaginary part =  0
- Using symmetries to sum only over the IBZ_q  =  1
- Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 1008 (b,b',k,s) states in chi0.
+ Memory needed for bbp_ks_distrb: 0.1  [Mb] <<< MEM
+ Will sum 224 (b,b',k,s) states in chi0.
  Calculating chi0(q,omega,G,G")
 
  ==== Little Group Info ==== 
   External point: [ 5.0000E-01,  5.0000E-01,  0.0000E+00]
-  Number of points in the IBZ defined by little group:  18/64
+  Number of points in the IBZ defined by little group:  4/8
   Number of operations in the little group: 16/48
   No time-reversal symmetry with zero umklapp:  8
   No time-reversal symmetry with non-zero umklapp:  0
@@ -2000,239 +1372,99 @@ vmstk_mb:   0.00000000E+00
   time-reversal symmetry with zero umklapp:  8
   time-reversal symmetry with non-zero umklapp:  0
 
- Calculation status: 18 k-points to be completed
+ Calculation status: 4 k-points to be completed
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_chi0.F90
 line: 1408
-vmrss_mb:   7.09257812E+01
-min_mpicomm_vmrss_mb:   7.09257812E+01
-max_mpicomm_vmrss_mb:   7.09257812E+01
+vmrss_mb:   6.47031250E+01
+min_mpicomm_vmrss_mb:   6.47031250E+01
+max_mpicomm_vmrss_mb:   6.47031250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
 
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 15/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-cchi0 , wall:  0.09 [s] , cpu:  0.09 [s] <<< TIME
+ chi0: ik_bz: 1/8, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
+ chi0: ik_bz: 2/8, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
+cchi0 , wall:  0.02 [s] , cpu:  0.02 [s] <<< TIME
   chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  7, omega =   1, G,G')
+  chi0(q =  3, omega =   1, G,G')
        1       2       3       4       5       6       7       8       9
-    1  -7.915  -1.398  -1.120  -1.120  -1.398  -1.120  -1.398  -1.398  -1.120
-        0.000  -1.398   1.120  -1.120   1.398  -1.120   1.398  -1.398   1.120
+    1  -8.387  -1.711  -1.042  -1.042  -1.711  -1.042  -1.711  -1.711  -1.042
+        0.000  -1.711   1.042  -1.042   1.711  -1.042   1.711  -1.711   1.042
 
-    2  -1.398  -7.711   0.000  -1.097   0.000  -1.097  -0.000  -0.921   0.000
-        1.398   0.000  -1.266  -0.000  -0.374   0.000  -0.374  -0.000  -0.338
+    2  -1.711  -8.131   0.000  -1.180  -0.000  -1.180  -0.000  -1.280  -0.000
+        1.711   0.000  -1.694  -0.000  -0.307   0.000  -0.308  -0.000  -0.457
 
-    3  -1.120   0.000  -8.530   0.000  -1.097   0.000  -1.097  -0.000  -0.624
-       -1.120   1.266   0.000   0.000   0.000   0.000   0.000   0.338   0.000
+    3  -1.042   0.000  -8.978  -0.000  -1.180  -0.000  -1.180  -0.000  -0.092
+       -1.042   1.694   0.000  -0.000   0.000   0.000   0.000   0.457   0.000
 
-    4  -1.120  -1.097   0.000  -8.530  -0.000  -0.624  -0.000  -1.097  -0.000
-        1.120   0.000  -0.000   0.000  -1.266   0.000  -0.338   0.000   0.000
+    4  -1.042  -1.180  -0.000  -8.978   0.000  -0.092  -0.000  -1.180  -0.000
+        1.042   0.000   0.000   0.000  -1.694   0.000  -0.457   0.000   0.000
 
-    5  -1.398   0.000  -1.097  -0.000  -7.712  -0.000  -0.921  -0.000  -1.097
-       -1.398   0.374  -0.000   1.266   0.000   0.338   0.000   0.374  -0.000
+    5  -1.711  -0.000  -1.180   0.000  -8.131  -0.000  -1.280  -0.000  -1.180
+       -1.711   0.307  -0.000   1.694   0.000   0.457   0.000   0.308  -0.000
 
-    6  -1.120  -1.097   0.000  -0.624  -0.000  -8.530  -0.000  -1.097  -0.000
-        1.120  -0.000  -0.000  -0.000  -0.338   0.000  -1.266   0.000   0.000
+    6  -1.042  -1.180  -0.000  -0.092  -0.000  -8.978   0.000  -1.180   0.000
+        1.042  -0.000  -0.000  -0.000  -0.457   0.000  -1.694   0.000  -0.000
 
-    7  -1.398  -0.000  -1.097  -0.000  -0.921  -0.000  -7.712   0.000  -1.097
-       -1.398   0.374  -0.000   0.338  -0.000   1.266   0.000   0.374  -0.000
+    7  -1.711  -0.000  -1.180  -0.000  -1.280   0.000  -8.131  -0.000  -1.180
+       -1.711   0.308  -0.000   0.457  -0.000   1.694   0.000   0.307  -0.000
 
-    8  -1.398  -0.921  -0.000  -1.097  -0.000  -1.097   0.000  -7.711   0.000
-        1.398   0.000  -0.338  -0.000  -0.374  -0.000  -0.374   0.000  -1.266
+    8  -1.711  -1.280  -0.000  -1.180  -0.000  -1.180  -0.000  -8.131   0.000
+        1.711   0.000  -0.457  -0.000  -0.308  -0.000  -0.307   0.000  -1.694
 
-    9  -1.120   0.000  -0.624  -0.000  -1.097  -0.000  -1.097   0.000  -8.530
-       -1.120   0.338  -0.000  -0.000   0.000  -0.000   0.000   1.266   0.000
+    9  -1.042  -0.000  -0.092  -0.000  -1.180   0.000  -1.180   0.000  -8.978
+       -1.042   0.457  -0.000  -0.000   0.000   0.000   0.000   1.694   0.000
 
   chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  7, omega =   2, G,G')
+  chi0(q =  3, omega =   2, G,G')
        1       2       3       4       5       6       7       8       9
-    1  -2.448  -0.488  -0.223  -0.223  -0.488  -0.223  -0.488  -0.488  -0.223
-        0.000  -0.488   0.223  -0.223   0.488  -0.223   0.488  -0.488   0.223
+    1  -2.405  -0.529  -0.218  -0.218  -0.529  -0.218  -0.529  -0.529  -0.218
+        0.000  -0.529   0.218  -0.218   0.529  -0.218   0.529  -0.529   0.218
 
-    2  -0.488  -4.294   0.000  -0.316   0.000  -0.316  -0.000  -0.271   0.000
-        0.488   0.000  -0.310  -0.000  -0.120   0.000  -0.120   0.000  -0.097
+    2  -0.529  -4.221   0.000  -0.334  -0.000  -0.334  -0.000  -0.312   0.000
+        0.529   0.000  -0.362  -0.000  -0.105  -0.000  -0.106  -0.000  -0.089
 
-    3  -0.223   0.000  -3.545  -0.000  -0.316  -0.000  -0.316  -0.000  -0.279
-       -0.223   0.310   0.000   0.000  -0.000   0.000   0.000   0.097   0.000
+    3  -0.218   0.000  -3.483  -0.000  -0.334  -0.000  -0.334  -0.000  -0.248
+       -0.218   0.362   0.000  -0.000   0.000   0.000   0.000   0.089   0.000
 
-    4  -0.223  -0.316  -0.000  -3.545   0.000  -0.279   0.000  -0.316   0.000
-        0.223   0.000  -0.000   0.000  -0.310   0.000  -0.097  -0.000   0.000
+    4  -0.218  -0.334  -0.000  -3.483  -0.000  -0.248  -0.000  -0.334  -0.000
+        0.218   0.000   0.000   0.000  -0.362   0.000  -0.089   0.000   0.000
 
-    5  -0.488   0.000  -0.316   0.000  -4.295  -0.000  -0.271  -0.000  -0.316
-       -0.488   0.120   0.000   0.310   0.000   0.097   0.000   0.120  -0.000
+    5  -0.529  -0.000  -0.334  -0.000  -4.221  -0.000  -0.312  -0.000  -0.334
+       -0.529   0.105  -0.000   0.362   0.000   0.089   0.000   0.106  -0.000
 
-    6  -0.223  -0.316  -0.000  -0.279  -0.000  -3.545   0.000  -0.316  -0.000
-        0.223  -0.000  -0.000  -0.000  -0.097   0.000  -0.310   0.000   0.000
+    6  -0.218  -0.334  -0.000  -0.248  -0.000  -3.483  -0.000  -0.334   0.000
+        0.218   0.000  -0.000  -0.000  -0.089   0.000  -0.362  -0.000  -0.000
 
-    7  -0.488  -0.000  -0.316   0.000  -0.271   0.000  -4.295   0.000  -0.316
-       -0.488   0.120  -0.000   0.097  -0.000   0.310   0.000   0.120  -0.000
+    7  -0.529  -0.000  -0.334  -0.000  -0.312  -0.000  -4.221  -0.000  -0.334
+       -0.529   0.106  -0.000   0.089  -0.000   0.362   0.000   0.105   0.000
 
-    8  -0.488  -0.271  -0.000  -0.316  -0.000  -0.316   0.000  -4.294  -0.000
-        0.488  -0.000  -0.097   0.000  -0.120  -0.000  -0.120   0.000  -0.310
+    8  -0.529  -0.312  -0.000  -0.334  -0.000  -0.334  -0.000  -4.221  -0.000
+        0.529   0.000  -0.089  -0.000  -0.106   0.000  -0.105   0.000  -0.362
 
-    9  -0.223   0.000  -0.279   0.000  -0.316  -0.000  -0.316  -0.000  -3.545
-       -0.223   0.097  -0.000  -0.000   0.000  -0.000   0.000   0.310   0.000
+    9  -0.218   0.000  -0.248  -0.000  -0.334   0.000  -0.334  -0.000  -3.483
+       -0.218   0.089  -0.000  -0.000   0.000   0.000  -0.000   0.362   0.000
 
  make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    7 :     96.65  [%]
+  Average fulfillment of the sum rule on Im[epsilon] for q-point    3 :     97.12  [%]
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: m_screening_driver.F90
 line: 1539
-vmrss_mb:   7.09257812E+01
-min_mpicomm_vmrss_mb:   7.09257812E+01
-max_mpicomm_vmrss_mb:   7.09257812E+01
+vmrss_mb:   6.47031250E+01
+min_mpicomm_vmrss_mb:   6.47031250E+01
+max_mpicomm_vmrss_mb:   6.47031250E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...
 
-
-
---------------------------------------------------------------------------------
-  q-point number  8        q = (-0.250000, 0.500000, 0.250000) [r.l.u.]
---------------------------------------------------------------------------------
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1177
-vmrss_mb:   7.09257812E+01
-min_mpicomm_vmrss_mb:   7.09257812E+01
-max_mpicomm_vmrss_mb:   7.09257812E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- Using spectral method for the imaginary part =  0
- Using symmetries to sum only over the IBZ_q  =  1
- Using faster algorithm based on time reversal symmetry.
- Memory needed for bbp_ks_distrb: 0.9  [Mb] <<< MEM
- Will sum 2240 (b,b',k,s) states in chi0.
- Calculating chi0(q,omega,G,G")
-
- ==== Little Group Info ==== 
-  External point: [-2.5000E-01,  5.0000E-01,  2.5000E-01]
-  Number of points in the IBZ defined by little group:  40/64
-  Number of operations in the little group: 4/48
-  No time-reversal symmetry with zero umklapp:  2
-  No time-reversal symmetry with non-zero umklapp:  0
-
-  time-reversal symmetry with zero umklapp:  2
-  time-reversal symmetry with non-zero umklapp:  0
-
- Calculation status: 40 k-points to be completed
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_chi0.F90
-line: 1408
-vmrss_mb:   7.10820312E+01
-min_mpicomm_vmrss_mb:   7.10820312E+01
-max_mpicomm_vmrss_mb:   7.10820312E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- chi0: ik_bz: 1/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 2/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 3/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 4/64, spin: 1 , wall:  0.00 [s] , cpu:  0.02 [s] <<< TIME
- chi0: ik_bz: 5/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- ...
- chi0: ik_bz: 10/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 20/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 40/64, spin: 1 , wall:  0.01 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 45/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
- chi0: ik_bz: 60/64, spin: 1 , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-cchi0 , wall:  0.18 [s] , cpu:  0.17 [s] <<< TIME
-  chi0(G,G') at the    1 th omega   0.0000   0.0000 [eV]
-  chi0(q =  8, omega =   1, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -8.306  -1.047  -1.212  -1.590  -1.491  -1.491  -1.590  -1.212  -1.047
-        0.000  -1.047   1.212  -1.590   1.491  -1.491   1.590  -1.212   1.047
-
-    2  -1.047  -8.306   0.000  -1.367  -0.000  -1.013  -0.000  -0.861   0.000
-        1.047   0.000  -1.379   0.000  -0.000   0.000  -0.144  -0.000   0.000
-
-    3  -1.212   0.000  -6.962  -0.000  -0.687  -0.000  -0.734   0.000  -0.861
-       -1.212   1.379   0.000   0.340   0.000   0.331  -0.000   0.473  -0.000
-
-    4  -1.590  -1.367  -0.000  -8.131   0.000  -1.194   0.000  -0.735  -0.000
-        1.590  -0.000  -0.340   0.000  -0.889   0.000  -0.229   0.000  -0.144
-
-    5  -1.491  -0.000  -0.687   0.000  -8.730   0.000  -1.194   0.000  -1.013
-       -1.491   0.000  -0.000   0.889   0.000  -0.000   0.000   0.331  -0.000
-
-    6  -1.491  -1.013  -0.000  -1.194   0.000  -8.730  -0.000  -0.687  -0.000
-        1.491  -0.000  -0.331  -0.000   0.000   0.000  -0.889   0.000   0.000
-
-    7  -1.590  -0.000  -0.734   0.000  -1.194  -0.000  -8.132  -0.000  -1.367
-       -1.590   0.144   0.000   0.229  -0.000   0.889   0.000   0.340   0.000
-
-    8  -1.212  -0.861   0.000  -0.735   0.000  -0.687  -0.000  -6.961  -0.000
-        1.212   0.000  -0.473  -0.000  -0.331  -0.000  -0.340   0.000  -1.379
-
-    9  -1.047   0.000  -0.861  -0.000  -1.013  -0.000  -1.367  -0.000  -8.306
-       -1.047  -0.000   0.000   0.144   0.000  -0.000  -0.000   1.379   0.000
-
-  chi0(G,G') at the    2 th omega   0.0000  31.1085 [eV]
-  chi0(q =  8, omega =   2, G,G')
-       1       2       3       4       5       6       7       8       9
-    1  -2.794  -0.128  -0.517  -0.524  -0.432  -0.432  -0.524  -0.517  -0.128
-        0.000  -0.128   0.517  -0.524   0.432  -0.432   0.524  -0.517   0.128
-
-    2  -0.128  -2.794   0.000  -0.329  -0.000  -0.304  -0.000  -0.211   0.000
-        0.128   0.000  -0.279  -0.000  -0.000   0.000  -0.063  -0.000   0.000
-
-    3  -0.517   0.000  -4.025  -0.000  -0.267  -0.000  -0.251   0.000  -0.211
-       -0.517   0.279   0.000   0.109   0.000   0.100  -0.000   0.128  -0.000
-
-    4  -0.524  -0.329  -0.000  -4.379   0.000  -0.375   0.000  -0.251  -0.000
-        0.524   0.000  -0.109   0.000  -0.248   0.000  -0.075   0.000  -0.063
-
-    5  -0.432  -0.000  -0.267   0.000  -4.185   0.000  -0.375   0.000  -0.304
-       -0.432   0.000  -0.000   0.248   0.000  -0.000   0.000   0.100  -0.000
-
-    6  -0.432  -0.304  -0.000  -0.375   0.000  -4.185  -0.000  -0.267  -0.000
-        0.432  -0.000  -0.100  -0.000   0.000   0.000  -0.248   0.000   0.000
-
-    7  -0.524  -0.000  -0.251   0.000  -0.375  -0.000  -4.380  -0.000  -0.329
-       -0.524   0.063   0.000   0.075  -0.000   0.248   0.000   0.109   0.000
-
-    8  -0.517  -0.211   0.000  -0.251   0.000  -0.267  -0.000  -4.024  -0.000
-        0.517   0.000  -0.128  -0.000  -0.100  -0.000  -0.109   0.000  -0.279
-
-    9  -0.128   0.000  -0.211  -0.000  -0.304  -0.000  -0.329  -0.000  -2.794
-       -0.128  -0.000   0.000   0.063   0.000  -0.000  -0.000   0.279   0.000
-
- make_epsm1_driver , wall:  0.00 [s] , cpu:  0.00 [s] <<< TIME
-  Average fulfillment of the sum rule on Im[epsilon] for q-point    8 :     96.47  [%]
-
---- !PstatData
-iteration_state: {dtset: 2, }
-pid: 17392
-file: m_screening_driver.F90
-line: 1539
-vmrss_mb:   7.10820312E+01
-min_mpicomm_vmrss_mb:   7.10820312E+01
-max_mpicomm_vmrss_mb:   7.10820312E+01
-vmpeak_mb:   0.00000000E+00
-vmstk_mb:   0.00000000E+00
-...
-
- dataset: 2 , wall:  1.60 [s] , cpu:  1.50 [s] <<< TIME
+ dataset: 2 , wall:  0.37 [s] , cpu:  0.38 [s] <<< TIME
 
 == END DATASET(S) ==============================================================
 ================================================================================
@@ -2252,20 +1484,15 @@ vmstk_mb:   0.00000000E+00
 -          fftalg         512
            getwfk          -1
              iscf          -2
-           istwfk        2    0    3    0    0    0    7    0
+           istwfk        2    3    7
               ixc          11
            jdtset        1    2
               kpt      0.00000000E+00  0.00000000E+00  0.00000000E+00
-                       2.50000000E-01  0.00000000E+00  0.00000000E+00
                        5.00000000E-01  0.00000000E+00  0.00000000E+00
-                       2.50000000E-01  2.50000000E-01  0.00000000E+00
-                       5.00000000E-01  2.50000000E-01  0.00000000E+00
-                      -2.50000000E-01  2.50000000E-01  0.00000000E+00
                        5.00000000E-01  5.00000000E-01  0.00000000E+00
-                      -2.50000000E-01  5.00000000E-01  2.50000000E-01
-         kptrlatt        4    0    0      0    4    0      0    0    4
-          kptrlen      1.90947115E+01
-P           mkmem           2
+         kptrlatt        2    0    0      0    2    0      0    0    2
+          kptrlen      9.54735576E+00
+P           mkmem           1
             natom           2
             nband1         70
             nband2         60
@@ -2273,7 +1500,7 @@ P           mkmem           2
            nbdbuf2          6
            ndtset           2
             ngfft          30      30      30
-             nkpt           8
+             nkpt           3
            npweps1          0
            npweps2         15
            npwwfn1          0
@@ -2339,8 +1566,7 @@ P           mkmem           2
                        0.0000000  0.0000000  0.0000000     0.2500000  0.2500000  0.2500000
            tolwfr      1.00000000E-14
             typat      1  1
-              wtk        0.01563    0.12500    0.06250    0.09375    0.37500    0.18750
-                         0.04688    0.09375
+              wtk        0.12500    0.50000    0.37500
            xangst      0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
                        8.9311883380E-01  8.9311883380E-01  8.9311883380E-01
             xcart      0.0000000000E+00  0.0000000000E+00  0.0000000000E+00
@@ -2363,7 +1589,7 @@ P           mkmem           2
 
 ================================================================================
   
- Proc.   0 individual time (sec): cpu=          5.7  wall=          6.3
+ Proc.   0 individual time (sec): cpu=          1.6  wall=          1.7
 
  Calculation completed.
 .Delivered   0 WARNINGs and   0 COMMENTs to log file.
@@ -2371,10 +1597,10 @@ P           mkmem           2
 --- !FinalSummary
 program: abinit
 version: 10.5.1.4
-start_datetime: Wed Jun 25 17:38:29 2025
-end_datetime: Wed Jun 25 17:38:35 2025
-overall_cpu_time:          22.6
-overall_wall_time:          25.0
+start_datetime: Wed Jun 25 22:23:39 2025
+end_datetime: Wed Jun 25 22:23:41 2025
+overall_cpu_time:           6.4
+overall_wall_time:           6.5
 exit_requested_by_user: no 
 timelimit: 0
 pseudos: 
@@ -2388,12 +1614,12 @@ num_comments: 0
 
 --- !PstatData
 iteration_state: {dtset: 2, }
-pid: 17392
+pid: 21579
 file: abinit.F90
 line: 624
-vmrss_mb:   7.11875000E+01
-min_mpicomm_vmrss_mb:   5.10703125E+01
-max_mpicomm_vmrss_mb:   7.11875000E+01
+vmrss_mb:   6.48046875E+01
+min_mpicomm_vmrss_mb:   4.85937500E+01
+max_mpicomm_vmrss_mb:   6.48046875E+01
 vmpeak_mb:   0.00000000E+00
 vmstk_mb:   0.00000000E+00
 ...

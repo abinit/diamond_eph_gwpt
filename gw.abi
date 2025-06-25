@@ -15,7 +15,7 @@
                        # It is easier (and safer) to let ABINIT compute and use the Drude plasma frequency,
                        # instead of selecting a value by hand. This would be done thanks to the default value ppmfrq 0.0 .
 
- ngkpt 4 4 4
+ ngkpt 2 2 2
  nshiftk 1
  shiftk 0 0 0
 
