@@ -21,7 +21,7 @@
 
 # Sets 1-3 : Finite-wave-vector phonon calculations (defaults for all datasets)
 
-   getwfk_filepath "groundstateo_WFK.nc" # Use GS wave functions
+   getwfk_filepath "gso_WFK.nc" # Use GS wave functions
    kptopt   3          # Need full k-point set for finite-Q response
    rfphon   1          # Do phonon response
    tolvrs   1.0d-18    # Converge on potential residual

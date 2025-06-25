@@ -1,0 +1,34 @@
+ iomode       3
+ ndtset       2
+
+
+# NSCF computation of WFK file with empty states
+ nband1  70 nbdbuf -10 # A negative value means 10% of nband
+
+# Calculation of the screening (epsilon^-1 matrix)
+ optdriver2   3        # Screening calculation
+ getwfk       -1
+ ppmodel2     4
+ nband2       60       # Bands to be used in the screening calculation
+ ecuteps2     2        # Cut-off energy of the planewave set to represent the dielectric matrix.
+ ppmfrq2      0.0      # Imaginary frequency where to calculate the screening.
+                       # It is easier (and safer) to let ABINIT compute and use the Drude plasma frequency,
+                       # instead of selecting a value by hand. This would be done thanks to the default value ppmfrq 0.0 .
+
+ ngkpt 4 4 4
+ nshiftk 1
+ shiftk 0 0 0
+
+########################
+# Common to all datasets
+########################
+ ecut 45.0
+ nstep 150
+ iscf -2          # NSCF run
+ tolwfr 1e-14     # 1e-18 is the recommended value
+
+ getden_filepath "gso_DEN.nc"
+
+ structure "abifile:gso_DEN.nc"
+
+ pseudos "C.psp8"

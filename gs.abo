@@ -1,8 +1,8 @@
 
-.Version 10.3.4.3 of ABINIT, released Nov 2024.
-.(MPI version, prepared for a aarch64_darwin23.6.0_gnu14.2 computer) 
+.Version 10.5.1.4 of ABINIT, released May 2025.
+.(MPI version, prepared for a x86_64_linux_gnu11.4 computer) 
 
-.Copyright (C) 1998-2024 ABINIT group . 
+.Copyright (C) 1998-2025 ABINIT group . 
  ABINIT comes with ABSOLUTELY NO WARRANTY.
  It is free software, and you are welcome to redistribute it
  under certain conditions (GNU General Public License,
@@ -14,13 +14,13 @@
  acknowledgments of the ABINIT effort.
  For more information, see https://www.abinit.org .
 
-.Starting date : Thu 23 Jan 2025.
-- ( at 10h42 )
+.Starting date : Wed 25 Jun 2025.
+- ( at 17h36 )
   
-- input  file    -> groundstate.abi
-- output file    -> groundstate.abo
-- root for input  files -> groundstatei
-- root for output files -> groundstateo
+- input  file    -> gs.abi
+- output file    -> gs.abo
+- root for input  files -> gsi
+- root for output files -> gso
 
  Symmetries : space group Fd -3 m (#227); Bravais cF (face-center cubic)
 ================================================================================
@@ -43,7 +43,7 @@ _ WF disk file :      3.981 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
 --------------------------------------------------------------------------------
 -
 - outvars: echo of selected default values
--   iomode0 =  0 , fftalg0 =312 , wfoptalg0 =  0
+-   iomode0 =  0 , fftalg0 =512 , wfoptalg0 =  0
 -
 - outvars: echo of global parameters not present in the input file
 -  max_nthreads =    0
@@ -54,7 +54,7 @@ _ WF disk file :      3.981 Mbytes ; DEN or POT disk file :      0.208 Mbytes.
               amu      1.20110000E+01
            diemac      1.20000000E+01
              ecut      4.50000000E+01 Hartree
--          fftalg         312
+-          fftalg         512
            istwfk        2    0    0    0    3    0    0    0    0    0
                          0    0    0    0    0    0    0    0    0    0
                          7    0    0    0    0    0    0    0    0
@@ -235,11 +235,11 @@ tolerances: {tolvrs: 1.00E-18, }
  ETOT  3  -12.037644473556    -1.228E-05 6.202E-04 1.806E-03
  ETOT  4  -12.037644608680    -1.351E-07 1.703E-05 1.738E-05
  ETOT  5  -12.037644609483    -8.038E-10 6.231E-06 9.291E-08
- ETOT  6  -12.037644609486    -2.501E-12 2.239E-07 1.679E-10
- ETOT  7  -12.037644609486     3.535E-13 7.732E-08 7.776E-13
- ETOT  8  -12.037644609486    -1.599E-13 3.130E-09 1.425E-15
+ ETOT  6  -12.037644609486    -2.514E-12 2.239E-07 1.679E-10
+ ETOT  7  -12.037644609486     3.606E-13 7.732E-08 7.776E-13
+ ETOT  8  -12.037644609486    -1.652E-13 3.130E-09 1.425E-15
  ETOT  9  -12.037644609486     3.553E-14 1.110E-09 5.410E-18
- ETOT 10  -12.037644609486    -1.545E-13 4.580E-11 4.458E-21
+ ETOT 10  -12.037644609486    -1.510E-13 4.580E-11 4.457E-21
 
  At SCF step   10       vres2   =  4.46E-21 < tolvrs=  1.00E-18 =>converged.
 
@@ -259,7 +259,7 @@ lattice_vectors:
 lattice_lengths: [   4.77368,    4.77368,    4.77368, ]
 lattice_angles: [ 60.000,  60.000,  60.000, ] # degrees, (23, 13, 12)
 lattice_volume:   7.6920896E+01
-convergence: {deltae: -1.545E-13, res2:  4.458E-21, residm:  4.580E-11, diffor: null, }
+convergence: {deltae: -1.510E-13, res2:  4.457E-21, residm:  4.580E-11, diffor: null, }
 etotal    :  -1.20376446E+01
 entropy   :   0.00000000E+00
 fermie    :   3.75619764E-01
@@ -272,9 +272,9 @@ xred      :
 - [  0.0000E+00,   0.0000E+00,   0.0000E+00,  C]
 - [  2.5000E-01,   2.5000E-01,   2.5000E-01,  C]
 cartesian_forces: # hartree/bohr
-- [  5.14144272E-30,  -2.02541683E-30,   4.67403884E-31, ]
-- [ -5.14144272E-30,   2.02541683E-30,  -4.67403884E-31, ]
-force_length_stats: {min:   5.54573827E-30, max:   5.54573827E-30, mean:   5.54573827E-30, }
+- [ -1.55801295E-31,  -1.55801295E-31,   1.71381424E-30, ]
+- [  1.55801295E-31,   1.55801295E-31,  -1.71381424E-30, ]
+force_length_stats: {min:   1.72791995E-30, max:   1.72791995E-30, mean:   1.72791995E-30, }
 ...
 
  Integrated electronic density in atomic spheres:
@@ -286,27 +286,27 @@ force_length_stats: {min:   5.54573827E-30, max:   5.54573827E-30, mean:   5.545
 
  ----iterations are completed or convergence reached----
 
- Mean square residual over all n,k,spin=   20.506E-14; max=  45.799E-12
+ Mean square residual over all n,k,spin=   20.506E-14; max=  45.800E-12
  reduced coordinates (array xred) for    2 atoms
        0.000000000000      0.000000000000      0.000000000000
        0.250000000000      0.250000000000      0.250000000000
- rms dE/dt=  1.7198E-29; max dE/dt=  1.6829E-29; dE/dt below (all hartree)
+ rms dE/dt=  1.3821E-29; max dE/dt=  1.0518E-29; dE/dt below (all hartree)
     1       0.000000000000     -0.000000000000     -0.000000000000
-    2       0.000000000000      0.000000000000     -0.000000000000
+    2       0.000000000000     -0.000000000000     -0.000000000000
 
  cartesian coordinates (angstrom) at end:
     1      0.00000000000000     0.00000000000000     0.00000000000000
     2      0.89311883379777     0.89311883379777     0.89311883379777
 
  cartesian forces (hartree/bohr) at end:
-    1      0.00000000000000    -0.00000000000000     0.00000000000000
-    2     -0.00000000000000     0.00000000000000    -0.00000000000000
- frms,max,avg= 3.2018335E-30 5.1414427E-30   0.000E+00  0.000E+00  0.000E+00 h/b
+    1     -0.00000000000000    -0.00000000000000     0.00000000000000
+    2      0.00000000000000     0.00000000000000    -0.00000000000000
+ frms,max,avg= 9.9761505E-31 1.7138142E-30   0.000E+00  0.000E+00  0.000E+00 h/b
 
  cartesian forces (eV/Angstrom) at end:
-    1      0.00000000000000    -0.00000000000000     0.00000000000000
-    2     -0.00000000000000     0.00000000000000    -0.00000000000000
- frms,max,avg= 1.6464488E-28 2.6438359E-28   0.000E+00  0.000E+00  0.000E+00 e/A
+    1     -0.00000000000000    -0.00000000000000     0.00000000000000
+    2      0.00000000000000     0.00000000000000    -0.00000000000000
+ frms,max,avg= 5.1299424E-29 8.8127864E-29   0.000E+00  0.000E+00  0.000E+00 e/A
  length scales=  6.751000000000  6.751000000000  6.751000000000 bohr
               =  3.572475335191  3.572475335191  3.572475335191 angstroms
  Fermi (or HOMO) energy (hartree) =   0.37562   Average Vxc (hartree)=  -0.49276
@@ -328,7 +328,7 @@ local_psp           : -4.69508927182900E+00
 non_local_psp       : -5.64995438345552E-01
 total_energy        : -1.20376446094858E+01
 total_energy_eV     : -3.27560968238978E+02
-band_energy         :  3.72200161832183E-01
+band_energy         :  3.72200161832184E-01
 ...
 
 
@@ -352,9 +352,9 @@ band_energy         :  3.72200161832183E-01
            diemac      1.20000000E+01
              ecut      4.50000000E+01 Hartree
            etotal     -1.2037644609E+01
-            fcart      5.1414427240E-30 -2.0254168307E-30  4.6740388400E-31
-                      -5.1414427240E-30  2.0254168307E-30 -4.6740388400E-31
--          fftalg         312
+            fcart     -1.5580129467E-31 -1.5580129467E-31  1.7138142413E-30
+                       1.5580129467E-31  1.5580129467E-31 -1.7138142413E-30
+-          fftalg         512
            istwfk        2    0    0    0    3    0    0    0    0    0
                          0    0    0    0    0    0    0    0    0    0
                          7    0    0    0    0    0    0    0    0
@@ -556,15 +556,10 @@ P           mkmem           8
 - The licence allows the authors to put it on the Web.
 - DOI and bibtex: see https://docs.abinit.org/theory/bibliography/#gonze2016
 -
-- Proc.   0 individual time (sec): cpu=          1.6  wall=          1.7
+- Proc.   0 individual time (sec): cpu=          2.1  wall=          2.2
 
 ================================================================================
 
  Calculation completed.
 .Delivered   0 WARNINGs and   0 COMMENTs to log file.
-+Overall time at end (sec) : cpu=          6.4  wall=          6.7
-- [ALL OK] MEMORY CONSUMPTION REPORT FOR C CODE:
--   There were 68 allocations and 68 deallocations in C code
-- [ALL OK] MEMORY CONSUMPTION REPORT FOR FORTRAN CODE:
--   There were 897095 allocations and 897095 deallocations in Fortran
--   Remaining memory at the end of the calculation is 0
++Overall time at end (sec) : cpu=          8.5  wall=          8.8
